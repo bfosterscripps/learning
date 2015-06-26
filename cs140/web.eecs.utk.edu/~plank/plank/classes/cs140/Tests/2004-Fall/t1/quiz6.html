@@ -1,0 +1,43 @@
+<html>
+<center>
+<h4>CS140 Midterm Exam - October 5, 2004 - Page 6</h4>
+</center>
+
+<hr>
+<h3>Question 6</h3>
+
+You are writing a program that digests input files like <b>inputfile</b>.  
+The program's name is <b>digest.c</b>, and it reads its input from standard
+input.  The
+format of an input file is that each line contains a name (any number of words,
+no word may be a number), then a number <i>n</i> of scores, and then <i>n</i> scores.
+Note, <b>inputfile</b> adheres to this format.  For example, Tiger Woods's line has
+four scores: 72, 64, 70, 71.  Scores are floating point numbers.
+<p>
+There may be comment lines which begin with '#' as the first character on the
+line -- these should be ignored.
+<p>
+You are to write a program that reads in a file of this format, and prints out
+for each line:
+<p>
+<UL>
+<LI> The average of all scores on the line, with 4 decimal places and 10 overall
+characters (e.g. use <b>"%10.4lf"</b> to print out the average).
+<LI> The name.
+</ul>
+<p>
+
+Therefore running <b>digest < inputfile</b> will yield:
+<pre>
+   69.2500 Tiger Woods
+   68.3333 Vijay Singh
+   72.2000 Phil Mickelson
+   73.5000 Davis Love III
+   70.3333 Sergio Garcia
+   69.0000 Cher
+   99.0000 E. Power Biggs
+</pre>
+
+<p>
+You may assume that the input file is in the correct format -- in other
+words, you do not need to do <i>any</i> error checking!!!!

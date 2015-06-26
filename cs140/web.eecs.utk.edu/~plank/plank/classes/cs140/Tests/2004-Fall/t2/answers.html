@@ -1,0 +1,174 @@
+<title>CS140 Final Exam: December 7 2004</title>
+<body bgcolor=ffffff>
+
+<h1>CS140 Final Exam: December 7, 2004</h1>
+<hr>
+<h2>Answer to Question 1</h2>
+
+<UL>
+<LI> <b>Part 1:</b>  Look at the implementation of <b>dll_append</b>.
+This is a <b>malloc()</b> and a few pointer operations.  Answer: <i>a</i>.
+<LI> <b>Part 2:</b>  In the worst case, the splay tree is a line, as in
+Question 4, and the operation has to go over every element.  Splay trees
+guarantee good behavior over collections of operations, not over
+single operations.  Answer: <i>c</i>.
+<LI> <b>Part 3:</b>  AVL trees guarantee that insertion and find
+operations are in log time: 
+Answer: <i>b</i>.
+<LI> <b>Part 4:</b>  In the worst case, all <i>n</i> elements are 
+consecutively located, and you try to find an element that requires you
+to search all <i>n</i> elements.
+Answer: <i>c</i>.
+<LI> <b>Part 5:</b>  All tree traversals visit each node and link
+once.  There are <i>n</i> nodes and <i>n-1</i> links.  Answer: <i>c</i>.
+<LI> <b>Part 6:</b>  This performs a constant number of pointer operations:
+Answer: <i>a</i>.
+<LI> <b>Part 7:</b>  Here is where the performance of splay trees is
+good -- the operations average to be logarithmic: 
+Answer: <i>d</i>.
+<LI> <b>Part 8:</b>  Straightforward:
+Answer: <i>d</i>.
+<LI> <b>Part 9:</b>  This creates a line, and is the worst-case for binary
+trees: Answer: <i>e</i>.
+<LI> <b>Part 10:</b>  Again straightforward: Answer: <i>d</i>.
+</UL>
+
+<hr>
+<h2>Answer to Question 2</h2>
+
+<h3>Part 1</h3>
+63 mod 32 equals 31.  Since elements 31, and 0 through 3 are taken, 
+the element will go into location 4.
+
+<h3>Part 2</h3>
+
+With quadratic probing, we test <i>h</i>, which equals 31.  It is taken, 
+so we test <i>(h+1*1)%32</i>, which equals 0.  That is taken, so we test
+<i>(h+2*2)%32</i>, which equals 3.  That is taken, so we test
+<i>(h+3*3)%32</i>, which equals 8.  That is also taken, so we test
+<i>(h+4*4)%32</i>, which equals 15.  That one is free, so that is where 
+it goes.  Answer = 15.
+
+<hr>
+<h2>Answer to Question 3</h2>
+
+There exist positive constants <i>n</i> and <i>m</i> such that for
+all values of <i>r</i> greater than <i>n</i>, <i>m*b(r) > a(r)</i>.
+That is answer <i>e</i>.  The only other answer that makes any sense
+is <i>n</i>, although it does not define what <i>r_0</i> is.  If <i>r_0</i>
+is a positive constant, and <i>n</i> equals 1 (which of course is a 
+positive constant), then you'll note that answer <i>n</i> is equivalent
+to answer <i>e</i>.  None of the other answers are even close.
+
+<hr>
+<h2>Answer to Question 4</h2>
+
+<h3>Part 1</h3>
+
+<p>
+<center>
+<table border=5 cellpadding=10>
+<td>
+<IMG src="splay-p1-ans.jpg">
+</td></table>
+</center>
+
+<h3>Part 2</h3>
+
+<p>
+<center>
+<table border=5 cellpadding=10><td>
+<IMG src="splay-p2-ans.jpg">
+</td></table>
+</center>
+
+<hr>
+<h2>Answer to Question 5</h2>
+
+<h3>Part 1</h3>
+
+The internal nodes hold the minimum keys of all but their
+leftmost subtrees.  So:
+
+<center><IMG src="B-Tree-1-A1.jpg"></center><p>
+
+<h3>Part 2</h3>
+
+When 15 is added, the external node holding it has five values, so the node
+must be split into two nodes, one with three values, and one with two.
+This adds an extra link to its parent, which now has five links, so it too
+must be split.  If we split the left sides of each node into two, and the
+right sides into three, then the resulting tree is:
+<center><IMG src="B-Tree-1-A2a.jpg"></center><p>
+If we split the left sides of each node into three, and the
+right sides into two, then the resulting tree is:
+<center><IMG src="B-Tree-1-A2b.jpg"></center><p>
+These are the only two correct answers.  An optimization of B-trees would
+"borrow" a slot from a neighboring node, such as:
+<center><IMG src="B-Tree-1-A2c.jpg"></center><p>
+However, this answer did not receive full credit, since it is not part
+of the standard definition of B-Trees.
+
+<hr>
+<h2>Answer to Question 6</h2>
+
+This is a very simple recursival postorder traversal.    If my left subtree
+is a binary search tree whose maximum key is less than mine, and my 
+right subtree is a binary search tree whose minimum key is greater than
+mine, then this is a binary search tree:
+
+<p>
+<center>
+<table border=3 cellpadding=3><td>
+<pre>int is_bstree(BTreeNode *root, double *min, double *max)
+{
+  double subtree_min, subtree_max;
+
+  if (root->left == NULL) {
+    *min = root->key.d;
+  } else {
+    if (!is_bstree(root->left, &subtree_min, &subtree_max)) return 0;
+    if (subtree_max >= root->key.d) return 0;
+    *min = subtree_min;
+  }
+
+  if (root->right == NULL) {
+    *max = root->key.d;
+  } else {
+    if (!is_bstree(root->right, &subtree_min, &subtree_max)) return 0;
+    if (subtree_min <= root->key.d) return 0;
+    *max = subtree_max;
+  }
+
+  return 1;
+}
+</pre></td></table></center>
+<hr>
+
+<h2>Answer to Question 7</h2>
+
+Here is what the tree looks like after reading in the input data:
+
+<p>
+<center>
+<table border=5 cellpadding=10>
+<td>
+<IMG src="Rb-tree.jpg">
+</td></table>
+</center>
+<p>
+So, it will print out:
+<p>
+<UL>
+<LI> Character 4 of "Gonna": "a"
+<LI> Character 0 of "Hey": "H"
+<LI> Character 1 of "Joe,": "o"
+<LI> Character 7%4=3 of "Now?": "?"
+<LI> Character 5%3=2 of "Run": "n"
+<LI> Character 6%2=0 of "To": "T"
+<LI> Character 2 of "Where": "e"
+<LI> Character 3%3=0 of "You": "Y"
+</UL>
+Meaning the answer is: <b>aHo?nTeY</b>
+<p>
+You can cut/paste the program and try it yourself if you want.

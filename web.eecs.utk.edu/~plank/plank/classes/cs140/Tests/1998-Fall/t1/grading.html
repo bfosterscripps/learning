@@ -1,0 +1,184 @@
+<title> CS140 -- Midterm Exam: Grading</title>
+
+<body bgcolor=FFDCCC>
+<h1> CS140 -- Midterm Exam: Grading</h1>
+
+Just one comment -- I do give partial credit for certain answers
+below.  If you did get partial credit, you should know that your
+answer was wrong, but enough of your thinking was right to warrant 
+some points.  If you did not get partial credit for an answer, 
+do not come and try to argue with me and explain your thinking --
+my answer will be that you got the problem wrong and you were not
+thinking along the lines that I wanted you to think along.
+<p>
+The multiple choice grading is kind of detailed -- it was done
+automtically, obviously with a program that you are capable of
+writing.   If you'd like to see it (of course, it uses the 
+fields library), it is in 
+<a href="grader.c"><b>grader.c</b></a>.
+Try it out if you want.
+
+<hr>
+<h3>Questions 1-3</h3>
+Questions 1 through 3 were worth three points each.  
+Grading was as follows:
+<UL>
+<LI> <b>Question 1</b>: 3 points for <i>c</i>.  Zero points for anything else.
+<LI> <b>Question 2</b>: 3 points for <i>i</i>.  I gave one
+point for <i>g</i>, <i>d</i>, and <i>j</i>, which meant that you
+made one small, reasonable mistake.
+<LI> <b>Question 3</b>: 3 points for <i>c</i>, and one point for <i>f</i>,
+     which happened when you thought that <b>a()</b> modified 
+     <b>i</b> and <b>j</b>.  Also, if you missed question 1, but
+     gave the same answer for questions 1 and 3, then I gave you 
+     1 point, because you at least understood that <b>a()</b> did
+     not modify <b>i</b> and <b>j</b>.
+</UL>
+
+<hr>
+<h3>Questions 4-7</h3>
+
+Questions 4 through 7 were worth four points each.  
+Grading was as follows:
+
+<UL>
+<LI> <b>Question 4</b>: 4 points for <i>b</i>.  Zero points for anything else.
+<LI> <b>Question 5</b>: 4 points for <i>d</i>.  
+     Zero points for anything else.
+<LI> <b>Question 6</b>: 4 points for <i>d</i>.  
+     One point for <i>b</i>, which I took as meaning that you thought
+     that <b>s</b> and <b>s1</b> pointed to different places
+     (i.e. "<b>s = strdup(revstring(s1));</b>").
+<LI> <b>Question 7</b>: 4 points for <i>h</i>, 3 points for <i>j</i>,
+     1 point for <i>c</i>, which is what you would get if there
+     were actually memory allocated for <b>s</b>.
+</UL>
+
+<hr>
+<h3>Questions 8-11</h3>
+
+Questions 8 through 11 were worth four points each.  
+Grading was as follows:
+
+<UL>
+<LI> <b>Question 8</b>: 4 points for <i>g</i>, and one point for
+     <i>h</i>, which means that you messed up the <i>(i+1)</i> in 
+     line 2.
+<LI> <b>Question 9</b>: 4 points for <i>l</i>, three points for
+     <i>m</i>, meaning you had the value of <b>i</b> wrong, and
+     one point for <i>h</i>, meaning you missed the error, but
+     got the math right.
+<LI> <b>Question 10</b>: 4 points for <i>k</i>, three points for
+     <i>l</i>, meaning you had the value of <b>i</b> wrong, and
+     one point for <i>h</i>, meaning you missed the error, but
+     got the math right.
+<LI> <b>Question 11</b>: 4 points for <i>e</i>, three points for
+     <i>d</i>, meaning you spaced on the last line, and
+     one point for <i>k</i>, meaning you though line two was
+     an error since it had no words on it.
+</UL> 
+
+     
+<hr>
+<h3>Questions 12-14</h3>
+
+Question 12 was 4 points.  Questions 13 and 14 were 5 points each.
+Grading was as follows:
+
+<UL>
+<LI> <b>Question 12</b>: You received 4 points for answering
+     <i>b</i>.  If you answered <i>b</i> and any other answer,
+     but you didn't circle <i>c</i>, you got 2 points.  If you
+     answered <i>b</i> and <i>c</i> (and/or any others), you got
+     1 point.  If you did not answer <i>b</i>, you received zero 
+     points.
+<LI> <b>Question 13</b>: If you answered just <i>c</i> and <i>e</i>,
+     you received 5 points.   If you answered <i>c</i> or <i>>e</i> only,
+     received 4 points.
+     If you answered <i>c</i> and/or <i>e</i>
+     and also put down other things, you started with the points
+     above, and were penalized in the following way:
+<UL>
+<LI> 1 point off for answering <i>b</i> and/or <i>f</i>, because
+           at least their types are all correct -- they are just
+           missing memory allocation.
+<LI>  2 points off for answering <i>a</i>, <i>d</i> and/or <i>g</i>.
+</UL>
+If you didn't answer <i>c</i> or <i>e</i>, then you received one
+point for ansewring <i>b</i> or <i>f</i>, but not the others.
+Zero otherwise.
+<LI> <b>Question 14</b>: If you answered just <i>c</i> and <i>g</i>,
+     or <i>c</i>, <i>g</i> and <i>d</i>, 
+     you received 5 points.   If you answered 
+     <i>c</i> only <i>g</i> only, <i>c</i> and <i>d</i> or
+     <i>g</i> and <i>d</i>, you received 4 points.  If you answered
+     <i>d</i> only, then you received 3 points.
+     If you answered <i>c</i> <i>d</i> and/or <i>g</i>
+     and also put down other things, you started with the points
+     above, and were penalized in the following way:
+<UL>
+<LI> 1 point off for answering <i>e</i>, <i>h</i> and/or <i>f</i>, because
+           they aren't quite as bad as the others.
+<LI>  2 points off for answering <i>a</i> and/or <i>b</i>.
+</UL>
+If you didn't answer <i>c</i>, <i>d</i> or <i>g</i>, then you received one
+point for ansewring <i>e</i>, <i>h</i> or <i>f</i>, but not the others.
+Zero otherwise.
+</UL>
+
+<hr>
+<h3>Question 15</h3>
+
+Question 15 was worth 10 points, allocated as follows:
+<UL>
+<LI> Getting the <b>main(int argc, char **argv)</b> declaration right: 
+     2 points.
+<LI> Getting the <b>for()</b> loop right: 3 points.  If  you had the 
+     indices wrong, you lost a point.
+<LI> Doing a <b>printf("%c", ...</b> or a <b>putchar()</b>: 1 point.
+<LI> Actually finding and printing the right character: 4 points.
+</UL>
+
+
+<hr>
+<h3>Question 16</h3>
+
+Question 16 was worth 25 points, allocated as follows:
+<UL>
+<LI> Declarations: 3 points
+<UL>
+<LI> Having a <b>FILE *</b>: 1/2 point.
+<LI> Having an <b>int</b> for <b>n</b>: 1/2 point.
+<LI> Having an array for the lines: 1 point.  Only 1/2 point if you
+     got the type wrong.
+<LI> Having a <b>IS</b>, or a big character array for input: 1/2 point.
+<LI> Having an induction variable for the <b>for/while</b> loop: 1/2 point.
+</UL>
+<LI> Error checking for the right number of argument: 1 point.
+<LI> Getting that error checking right and printing out the right
+     thing: 1 point.
+<LI> Setting <b>n</b> with <b>atoi()</b> or <b>ssanf()</b>: 2 points.
+<LI> Error checking <b>n</b>: 1 point.
+<LI> Getting that error checking right and printing out the right
+     thing: 1 point.
+<LI> Doing the <b>fopen()</b>: 1 point.
+<LI> Error checking the output of <b>fopen()</b>: 1 point.
+<LI> <b>malloc()</b>-ing an array for the lines: 1 point.
+<LI> Making sure you have <b>n</b> elements in that <b>malloc()</b>: 1 point.
+<LI> Getting the types and <b>sizeof()</b> in the <b>malloc()</b> 
+     right: 2 points.
+<LI> Initializing the <b>IS</b> (you get this point for free if
+     you used <b>gets()</b>): 1 point.
+<LI> Having a loop to read input: 1 point.
+<LI> Having the loop end on EOF or <b>n</b> lines: 2 point.  If you only
+     had it end on one of these conditions, you lost a point.
+<LI> Calling <b>strdup()</b>: 2 points.
+<LI> Having a loop to write the output: 1 point.
+<LI> Having the right variables in that loop so that the lines get
+     printed backwards: 1 point.
+<LI> Getting the <b>fprintf()</b> or <b>fputs</b> right: 1 point.
+</UL>
+
+
+
+

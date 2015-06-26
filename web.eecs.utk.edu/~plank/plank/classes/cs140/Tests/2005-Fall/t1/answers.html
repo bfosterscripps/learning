@@ -1,0 +1,305 @@
+<title>CS140 Midterm Exam - October 11, 2005 - Answers</title>
+<center>
+<h2>CS140 Midterm Exam - October 11, 2005 - Answers</h2>
+<p>
+<h3>Jim Plank</h3>
+<p>
+</center>
+<hr>
+<h3>Question 1</h3>
+
+The variable <b>p</b> holds the address of array element <b>a[2]</b>.  
+The first <b>printf()</b> statement says that this is 0xbffff024.  Therefore,
+<b>a</b> starts at 0xbffff024-8 = 0xbffff01c.  <b>p</b> is at address
+0xbffff044.  Therefore, this is what memory looks like just after that
+<b>printf()</b> statement:
+<p><center>
+<IMG align=center src="Q1-1.jpg">
+</center><p>
+Now, <b>b()</b> is called with two parameters: <b>p</b>, which is 
+0xbffff024, and <b>&p</b> which is <b>0xbffff044</b>.  Therefore, 
+<b>ip</b> = 0xbffff024 and <b>ipp</b> = 0xbffff044.  The first 
+<b>printf()</b> statement in <b>b()</b> prints the address of <b>ip</b>,
+which is 0xbffffeff8.  Therefore, this is what we know about memory 
+when <b>b()</b> starts.  Note, I don't put <b>ipp</b> in a memory slot
+because we don't know its address:
+<p><center>
+<IMG align=center src="Q1-2.jpg">
+</center><p>
+The first printf statement will print 0xbffff024 and 0xbffff044.
+Next, we execute <b>*ipp += 2</b>, which means that the value in 
+address 0xbffff044 will have eight added to it.  This means that
+<b>p</b> in <b>main()</b> has its value changed to 0xbffff02c.
+Here is the change:
+<p><center>
+<IMG align=center src="Q1-3.jpg">
+</center><p>
+The next statement is <b>**ipp = 1</b>.  Since <b>*ipp</b> is 
+0xbffff02c, this changes array element <b>a[4]</b> to be 1:
+<p><center>
+<IMG align=center src="Q1-3a.jpg">
+</center><p>
+Now we perform <b>*ip = 17</b>.  Since <b>ip</b> is 0xbffff024, this sets
+array element <b>a[2]</b> to be 17:
+<p><center>
+<IMG align=center src="Q1-4.jpg">
+</center><p>
+Now, we return, and the <b>p++</b> statement adds four to <b>p</b>:
+<p><center>
+<IMG align=center src="Q1-5.jpg">
+</center><p>
+Finally, we set <b>*p</b> to be three.  Since <b>p</b> is 0xbffff030, this 
+sets array element <b>a[5]</b> to be three:
+<p><center>
+<IMG align=center src="Q1-6.jpg">
+</center><p>
+Therefore, the final printouts will be:
+<pre>
+0xbffff01c
+0xbffff044
+0xbffff030
+15 14 17 12 1 3 9 8 7 6
+</pre>
+So -- the output to this program is:
+<p>
+<center>
+<table border=3><tr>
+<td><pre>0xbffff024 0xbffff044
+0xbfffeff8
+0xbffff024 0xbffff044.
+0xbffff01c
+0xbffff044
+0xbffff030
+15 14 17 12 1 3 9 8 7 6</pre><td></table>
+</pre></td></tr></table>
+<p>
+</center>
+<h4>Grading - 9 points</h4>
+<UL>
+<LI> One point for 0xbffff024 on line three
+<LI> One point for 0xbffff044 on line three
+<LI> One point for 0xbffff01c on line four
+<LI> One point for 0xbffff044 on line five
+<LI> One point for 0xbffff030 on line six
+<LI> One point for line 7 having at least 6 descending numbers
+<LI> One point for 17 in the third position on line 7
+<LI> One point for 1 in the fifth position on line 7
+<LI> One point for 3 in the sixth position on line 7
+</UL>
+<hr>
+<h3>Question 2</h3>
+
+The correct answers are D, E and F.  Here are pictures of each 
+implementation, starting just after the <b>newn->val</b> call.
+
+<p><center>
+<IMG align=center src="Q2-1.jpg">
+<p>
+<IMG align=center src="Q2-2.jpg">
+<p>
+<IMG align=center src="Q2-3.jpg">
+<p>
+<IMG align=center src="Q2-4.jpg">
+<p>
+<IMG align=center src="Q2-5.jpg">
+<p>
+<IMG align=center src="Q2-6.jpg">
+</center><p>
+
+<h4>Grading - 9 points</h4>
+<UL>
+<LI> 1.5 points for not saying <i>A</i> works.
+<LI> 1.5 points for not saying <i>B</i> works.
+<LI> 1.5 points for not saying <i>C</i> works.
+<LI> 1.5 points for saying <i>D</i> works.
+<LI> 1.5 points for saying <i>E</i> works.
+<LI> 1.5 points for saying <i>F</i> works.
+</UL>
+
+<hr>
+<h3>Question 3</h3>
+
+When <i>i</i> is even, the first word on the line gets appended to
+a list.  When <i>i</i> is odd, the last word on the line gets prepended
+to the list.  So, the building of the list is:
+<p>
+<center>
+<table border=3>
+<tr>
+<td align=center><i>i</i></td>
+<td align=center>Action</td>
+<td align=center><i>d</i></td>
+</tr>
+<tr>
+<td>
+0<br>
+1<br>
+2<br>
+3<br>
+4<br>
+5<br>
+6<br>
+7<br>
+</td>
+<td>
+Append<br>
+Prepend<br>
+Append<br>
+Prepend<br>
+Append<br>
+Prepend<br>
+Append<br>
+Prepend<br>
+</td>
+<td>
+"A"<br>
+"top", "A"<br>
+"top", "A", "Is"<br>
+"flame", "top", "A", "Is"<br>
+"flame", "top", "A", "Is", "The"<br>
+"love", "flame", "top", "A", "Is", "The"<br>
+"love", "flame", "top", "A", "Is", "The", "And"<br>
+"name", "love", "flame", "top", "A", "Is", "The", "And"<br>
+</td></tr></table></center>
+<p>
+The output is:
+<p>
+<center>
+<table border=3><td><pre>
+name
+love
+flame
+top
+A
+Is
+The
+And</pre></td></table></center><p>
+
+<h4>Grading - 6 points</h4>
+<UL>
+<LI> 1.5 points for having "name", "love", "flame", "top"
+<LI> 1.5 points for having "A", "Is", "The", "And"
+<LI> 1.5 points for having the correct output, or having it reversed.
+<LI> 1.5 points for having the correct output.
+</UL>
+
+<hr>
+<h3>Question 4</h3>
+
+When <i>i</i> is even, the first word on the line is enqueued onto a queue.
+When <i>i</i> is odd, the first word on the line is pushed onto a stack.
+Then the queue is printed out, and the stack is printed out.  The output:
+
+<p>
+<center>
+<table border=3><td><pre>A
+Is
+The
+And
+is
+beauty
+silver
+the</pre></td></table></center><p>
+
+<h4>Grading - 6 points</h4>
+<UL>
+<LI> 1.5 points for having "A", "Is", "The", "And"
+<LI> 1.5 points for having "is", "beauty", "silver", "the"
+<LI> 1.5 points for having the correct output, or having it reversed.
+<LI> 1.5 points for having the correct output.
+</UL>
+
+
+<hr>
+<h3>Question 5</h3>
+
+For each line, <i>x</i> points to the first occurrence of the character 'o'.
+If there is no 'o', then it points to the first character on the line.
+Variable <i>y</i> points to the first occurrence of the character 's'.
+If there is no 's', then it points to the first character on the line.
+The program then prints the difference between <i>y</i> and <i>x</i>.
+Although these are pointers, that's ok -- chars are one byte each, so this
+will print out the number of characters between the pointers.
+
+
+<p>
+<center>
+<table border=3>
+<tr>
+<td align=center>Line number</td>
+<td align=center><i>x</i></td>
+<td align=center><i>y</i></td>
+<td align=center><i>y - x</i></td>
+</tr>
+<tr>
+<td align=center>1</td>
+<td align=center>&(is->text1[3])</td>
+<td align=center>&(is->text1[7])</td>
+<td align=center>4</td>
+</td>
+</tr><tr>
+<td align=center>2</td>
+<td align=center>&(is->text1[5])</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>-5</td>
+</td>
+</tr><tr>
+<td align=center>3</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>&(is->text1[1])</td>
+<td align=center>1</td>
+</td>
+</tr><tr>
+<td align=center>4</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>0</td>
+</td>
+</tr><tr>
+<td align=center>5</td>
+<td align=center>&(is->text1[11])</td>
+<td align=center>&(is->text1[4])</td>
+<td align=center>-7</td>
+</td>
+</tr><tr>
+<td align=center>6</td>
+<td align=center>&(is->text1[12])</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>-12</td>
+</td>
+</tr><tr>
+<td align=center>7</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>&(is->text1[8])</td>
+<td align=center>8</td>
+</td>
+</tr><tr>
+<td align=center>8</td>
+<td align=center>&(is->text1[0])</td>
+<td align=center>&(is->text1[1])</td>
+<td align=center>1</td>
+</td></tr></table></center><p>
+
+The output is therefore
+<p>
+<center>
+<table border=3><td><pre>4
+-5
+1
+0
+-7
+-12
+8
+1</pre></td></table></center><p>
+
+<h4>Grading - 6 points</h4>
+<UL>
+<LI> <b>Line 1:</b> .75 for "4", .5 for "-4", .25 for "3", .25 for "7"
+<LI> <b>Line 2:</b> .75 for "-5", .5 for "5", .25 for "0"
+<LI> <b>Line 3:</b> .75 for "1", .5 for "-1", .25 for "0"
+<LI> <b>Line 4:</b> .75 for "0"
+<LI> <b>Line 5:</b> .75 for "-7", .5 for "7", .25 for "4", .25 for "11"
+<LI> <b>Line 6:</b> .75 for "-12", .5 for "12", .25 for "0"
+<LI> <b>Line 7:</b> .75 for "8", .5 for "-8", .25 for "0"
+<LI> <b>Line 8:</b> .75 for "1", .5 for "-1", .25 for "0"
+</UL>

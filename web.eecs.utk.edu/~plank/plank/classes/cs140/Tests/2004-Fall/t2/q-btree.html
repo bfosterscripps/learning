@@ -1,0 +1,52 @@
+<title> CS140 -- Final Exam: Questions 5 & 6</title>
+
+<body bgcolor=FFFFFF>
+<h2> CS140 -- Final Exam: December 7, 2004</h2>
+<hr><h3>Question 5: 10 points</h3>
+
+Behold the following B-Tree, where <I>M</i> = 4:
+
+<p>
+<center><IMG src="B-Tree-1.jpg" width=600></center><p>
+
+<h3>Part 1</h3>
+
+Specify the values that are held in the three interior nodes.  Specify
+them as "Root", "Left-Child", and "Right-Child".
+
+
+<h3>Part 2</h3>
+
+Draw the tree that results when 15 is inserted into the tree.
+Include in your drawing the values in both the interior and exterior
+nodes.
+
+
+<hr><h3>Question 6 -- 15 points</h3>
+
+Behold a <b>typedef</b> for a binary tree node:
+
+<p>
+<table border=3 cellpadding=4>
+<td><pre>
+typedef struct btreenode {
+  Jval key;
+  struct btreenode *left;
+  struct btreenode *right;
+} BTreeNode;
+</pre>
+</td>
+</table>
+<p>
+Your job is to write a procedure:
+<pre>
+   int is_bstree(BTreeNode *root, double *min, double *max); 
+</pre>
+<p>
+<b>Is_bstree()</b> assumes that it is passed the root of a binary tree,
+and that the keys are <b>double</b>s.
+It returns 1 if the tree is a valid binary search tree, and 0 otherwise.
+The binary search tree should not have duplicate keys.
+It also returns the minimum and maximum keys in the tree through the
+arguments <b>min</b> and <b>max</b>.
+

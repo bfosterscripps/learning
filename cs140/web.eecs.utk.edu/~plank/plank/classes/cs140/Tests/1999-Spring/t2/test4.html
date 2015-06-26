@@ -1,0 +1,32 @@
+<title> CS140 -- Final Exam: Q14</title>
+
+<body bgcolor=FFFFFF>
+<h3> Question 14<br>
+CS140 Final Exam: May 10, 1999</h3>
+
+The following code is a typedef for a binary search tree node:
+<pre>
+typedef struct bstreenode {
+  char *key;
+  Jval val;
+  struct bstreenode *left;
+  struct bstreenode *right;
+} BstreeNode;
+</pre>
+
+And the following is the typedef for a binary search tree:
+
+<pre>
+typedef struct {
+  BstreeNode *root;
+} Bstree;
+</pre>
+
+Suppose keys are character strings.  Write code for:
+<pre>
+void insert_node(Bstree *tree, char *key, Jval v);
+</pre>
+This inserts a new node into the tree with the given key and value.
+You may assume that there are no nodes in the tree with the given key.
+<p>
+Do your answer on the answer sheet.

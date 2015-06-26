@@ -1,0 +1,106 @@
+<title> CS140 -- Final Exam: Q15 - Q19, Page 1</title>
+
+<body bgcolor=FFFFFF>
+<h3> Questions 15-19, Page 1.<br>
+CS140 Final Exam: May 10, 1999</h3>
+
+These questions concern hashing.  Our hash table is simply an 
+array of integers.  Keys are positive integers, and the hash table
+is initialized to consist of all zeros.  <b>hash_find</b> is a 
+routine that takes a hash table, the table size, and a key.  It
+returns the index of the table containing the key, or -1 if the
+key is not in the hash table.
+<p>
+Assume that keys are inserted using linear probing and that keys
+are never deleted.  The hash function is <b>hash(int key, int tsize)</b>,
+which returns a hash value between zero and <b>(tsize-1)</b>. 
+<p>
+Below are four implementations of <b>hash_find()</b>:
+
+<p>
+<table border=4 cellpadding=5>
+<TR>
+<TD valign=top>
+(a)
+<pre>
+
+int hash_find(int *table, 
+              int tsize, int key)
+{
+  int h;
+
+  h = hash(key, tsize);
+  while (table[h] != key) h++;
+  return h;
+}
+</pre></TD>
+
+<TD valign=top>
+(b)
+<pre>
+
+int hash_find(int *table, 
+              int tsize, int key)
+{
+  int h, i, j;
+
+  i = 0;
+  h = hash(key, tsize);
+  while(i < tsize) {
+    j = table[(h+i)%tsize];
+    if (j == key) return (h+i)%tsize;
+    if (j == 0) return -1;
+    i++;
+  }
+}
+</pre>
+</TD>
+
+</TR>
+<TR>
+
+<TD valign=top>
+(c)
+<pre>
+
+int hash_find(int *table, 
+              int tsize, int key)
+{
+  int h, j, i;
+
+  i = 0;
+  h = hash(key, tsize);
+  while(i < tsize) {
+    j = (h+i)%tsize;
+    if (j == key) return table[j];
+    if (j == 0) return table[-1];
+    i++;
+  }
+}
+</pre>
+</TD>
+
+<TD valign=top>
+(d)
+<pre>
+
+int hash_find(int *table, 
+              int tsize, int key)
+{
+  int h, j, i;
+
+  i = 0;
+  h = hash(key, tsize);
+  j = h;
+  while(i < tsize) {
+    if (j > tsize) j -= tsize;
+    if (hash(table[j], tsize) == h) return j;
+    if (table[j] == 0) return -1;
+    i++;
+  }
+}
+</pre>
+</TD>
+
+</TR>
+</TABLE>

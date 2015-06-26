@@ -1,0 +1,73 @@
+<title> CS140 -- Midterm Exam: Q15 - Q16</title>
+
+<body bgcolor=FFDCCC>
+
+<h1> CS140 -- Midterm Exam: Q15 - Q16</h1>
+<p>
+<TABLE border=7 cellpadding=5>
+<TD valign=top>
+<b>Question 15</b>:
+
+Write a program called <b>larg</b> that prints out the 
+last character of every argument given on the command line.  
+<p>
+Here are some examples:
+<pre>
+UNIX> larg
+UNIX> larg Jim Plank
+<b>m
+k</b>
+UNIX>larg 1 2 3 4 50
+<b>1
+2
+3
+4
+0</b>
+UNIX> 
+</pre>
+</TD>
+<TD valign=top>
+<b>Question 16</b>:
+Write a program <b>revn</b> that takes two command line arguments
+-- an integer <b>n</b> and a filename <b>fn</b>.
+It then makes the file <b>fn</b>, which is the first <b>n</b> lines
+of standard input in reverse order.  <i>You may not use the stacks library
+that we talked about in class on tuesday -- just use an array instead.</i> 
+<p>
+Here are some examples (I've bold-faced the output):
+<pre>
+UNIX> revn
+<b>usage: revn n filename</b>
+UNIX> revn 10 f1 f2
+<b>usage: revn n filename</b>
+UNIX> revn 2 f1
+Give
+Him
+Six!
+< CNTL-D >
+UNIX> cat f1
+<b>Him
+Give</b>
+UNIX> revn 15 f2
+Give
+Him
+Six!
+< CNTL-D >
+UNIX> cat f2
+<b>Six!
+Him
+Give</b>
+UNIX> revn Jim Plank
+<b>Bad value of n</b>
+UNIX> revn -3 f3
+<b>Bad value of n</b>
+UNIX>
+</pre>
+The answer sheet has a skeleton of the code for you to fill in.
+<p>
+Obviously, if you can't do it all, do what you can so you can get 
+partial credit.  It helps in grading if you let me know what parts
+you didn't do.
+</TD>
+</TABLE>
+

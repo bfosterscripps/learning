@@ -1,0 +1,17 @@
+<title>Hints for SRM 609, D2, 250-pointer (MagicalStringDiv2)</title>
+<h3>Hints for SRM 609, D2, 250-pointer (MagicalStringDiv2)</h3>
+<h3>James S. Plank</h3>
+Sun Feb 16 14:03:09 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=round_overview&er=5&rd=15842>Problem Statement</a>.
+<hr>
+
+At 1199 submissions, a 97% success rate, and an average score of 227.77, this has to be one
+of the easiest Topcoder problems in history.  I would hope that you get it in under five minutes.
+If you want help, keep reading, but I urge you to figure this one out on your own.
+<hr>
+When do you change a character?
+<UL>
+<LI> When its index is less than <b>S.size()/2</b>, and it is not a '>'.
+<LI> When its index is greater than or equal to <b>S.size()/2</b>, and it is not a '<'.
+</UL>
+Run through <b>S</b> and add those up.

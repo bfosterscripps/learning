@@ -1,0 +1,229 @@
+Header 1.  Implementation A
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:14: error: cannot convert 'std::list<doble*, std::allocator<double*> >' to 'L*' in assignment
+---------------------------------------------------------------------------
+Header 2.  Implementation A
+
+Compilation scceeded -- running
+
+10
+10.01
+10.02
+10.03
+10.04
+10.05
+10.06
+10.07
+10.08
+10.09
+10.1
+10.11
+10.12
+10.13
+10.14
+---------------------------------------------------------------------------
+Header 3.  Implementation A
+
+Compilation scceeded -- running
+
+0x1001000b0
+0x1001000e0
+0x100100110
+0x100100140
+0x100100170
+0x1001001b0
+0x1001001e0
+0x100100210
+0x100100240
+0x100100270
+0x1001002b0
+0x1001002e0
+0x100100310
+0x100100340
+0x100100370
+---------------------------------------------------------------------------
+Header 1.  Implementation B
+
+Compilation scceeded -- running
+
+10
+10.01
+10.02
+10.03
+10.04
+10.05
+10.06
+10.07
+10.08
+10.09
+10.1
+10.11
+10.12
+10.13
+10.14
+---------------------------------------------------------------------------
+Header 2.  Implementation B
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:13: error: reqest for member 'begin' in '((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long unsigned int)i))', which is of non-class type 'L*'
+q6-test.cpp:13: error: reqest for member 'end' in '((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long unsigned int)i))', which is of non-class type 'L*'
+q6-test.cpp:14: error: invalid type argment of 'unary *'
+---------------------------------------------------------------------------
+Header 3.  Implementation B
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:13: error: reqest for member 'begin' in '((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long unsigned int)i))', which is of non-class type 'L*'
+q6-test.cpp:13: error: reqest for member 'end' in '((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long unsigned int)i))', which is of non-class type 'L*'
+---------------------------------------------------------------------------
+Header 1.  Implementation C
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:13: error: base operand of '->' has non-pointer type 'std::list<doble*, std::allocator<double*> >'
+q6-test.cpp:13: error: base operand of '->' has non-pointer type 'std::list<doble*, std::allocator<double*> >'
+---------------------------------------------------------------------------
+Header 2.  Implementation C
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:14: error: invalid type argment of 'unary *'
+---------------------------------------------------------------------------
+Header 3.  Implementation C
+
+Compilation scceeded -- running
+
+10
+10.01
+10.02
+10.03
+10.04
+10.05
+10.06
+10.07
+10.08
+10.09
+10.1
+10.11
+10.12
+10.13
+10.14
+---------------------------------------------------------------------------
+Header 1.  Implementation D
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:13: error: base operand of '->' has non-pointer type 'std::list<doble*, std::allocator<double*> >'
+q6-test.cpp:13: error: base operand of '->' has non-pointer type 'std::list<doble*, std::allocator<double*> >'
+---------------------------------------------------------------------------
+Header 2.  Implementation D
+
+Compilation scceeded -- running
+
+10
+10.01
+10.02
+10.03
+10.04
+10.05
+10.06
+10.07
+10.08
+10.09
+10.1
+10.11
+10.12
+10.13
+10.14
+---------------------------------------------------------------------------
+Header 3.  Implementation D
+
+Compilation scceeded -- running
+
+0x1001000b0
+0x1001000e0
+0x100100110
+0x100100140
+0x100100170
+0x1001001b0
+0x1001001e0
+0x100100210
+0x100100240
+0x100100270
+0x1001002b0
+0x1001002e0
+0x100100310
+0x100100340
+0x100100370
+---------------------------------------------------------------------------
+Header 1.  Implementation E
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:14: error: cannot convert 'std::list<doble*, std::allocator<double*> >' to 'L*' in assignment
+q6-test.cpp:15: error: reqest for member 'begin' in 'lp', which is of non-class type 'L*'
+q6-test.cpp:15: error: reqest for member 'end' in 'lp', which is of non-class type 'L*'
+---------------------------------------------------------------------------
+Header 2.  Implementation E
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:15: error: reqest for member 'begin' in 'lp', which is of non-class type 'L*'
+q6-test.cpp:15: error: reqest for member 'end' in 'lp', which is of non-class type 'L*'
+---------------------------------------------------------------------------
+Header 3.  Implementation E
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:15: error: reqest for member 'begin' in 'lp', which is of non-class type 'L*'
+q6-test.cpp:15: error: reqest for member 'end' in 'lp', which is of non-class type 'L*'
+---------------------------------------------------------------------------
+Header 1.  Implementation F
+
+Compilation scceeded -- running
+
+10
+10.01
+10.02
+10.03
+10.04
+10.05
+10.06
+10.07
+10.08
+10.09
+10.1
+10.11
+10.12
+10.13
+10.14
+---------------------------------------------------------------------------
+Header 2.  Implementation F
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:14: error: no match for 'operator=' in 'lp = ((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long nsigned int)i))'
+/sr/include/c++/4.2.1/bits/list.tcc:121: note: candidates are: std::list<_Tp, _Alloc>& std::list<_Tp, _Alloc>::operator=(const std::list<_Tp, _Alloc>&) [with _Tp = double, _Alloc = std::allocator<double>]
+q6-test.cpp:16: error: invalid type argment of 'unary *'
+---------------------------------------------------------------------------
+Header 3.  Implementation F
+
+Compilation failed:
+
+q6-test.cpp: In fnction 'void print_LVec(LVec&)':
+q6-test.cpp:14: error: no match for 'operator=' in 'lp = ((LVec*)v)->std::vector<_Tp, _Alloc>::operator[] [with _Tp = L*, _Alloc = std::allocator<L*>](((long nsigned int)i))'
+/sr/include/c++/4.2.1/bits/list.tcc:121: note: candidates are: std::list<_Tp, _Alloc>& std::list<_Tp, _Alloc>::operator=(const std::list<_Tp, _Alloc>&) [with _Tp = double*, _Alloc = std::allocator<double*>]
+

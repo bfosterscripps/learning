@@ -1,0 +1,179 @@
+<title>Hints for SRM 603, D2, 250-pointer (MiddleCode)</title>
+<h3>Hints for SRM 603, D2, 250-pointer (MiddleCode)</h3>
+<h3>James S. Plank</h3>
+Wed Jan 29 18:28:46 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=12940&rd=15836>Problem Statement</a>.
+<hr>
+
+The simplest solution is to simply execute the algorithm as written.  You'll start with a string
+<b>s</b> and an empty string <b>t</b>, and you'll find the character in <b>s</b> that goes into
+<b>t</b> and append it to <b>t</b>.  Then you delete the character from <b>s</b>.
+<p>
+For example, when <b>s</b> is "word", you have the following:
+
+<p><center><table border=3>
+<tr>
+<td align=center><b>s</b></td>
+<td align=center><b>t</b></td>
+<td align=center>New <b>s</b></td>
+<td align=center>New <b>t</b></td>
+</tr>
+<tr>
+<td align=center>"word"</td>
+<td align=center>""</td>
+<td align=center>"wrd"</td>
+<td align=center>"o"</td>
+</tr>
+<tr>
+<td align=center>"wrd"</td>
+<td align=center>"o"</td>
+<td align=center>"wd"</td>
+<td align=center>"or"</td>
+</tr>
+<tr>
+<td align=center>"wd"</td>
+<td align=center>"or"</td>
+<td align=center>"w"</td>
+<td align=center>"ord"</td>
+</tr>
+<tr>
+<td align=center>"w"</td>
+<td align=center>"ord"</td>
+<td align=center>""</td>
+<td align=center>"ordw"</td>
+</tr>
+</table></center><p>
+
+The only subtlety is how to delete the character from <b>s</b>.  One way is to use the 
+<b>substr()</b> method to create <b>s</b> from the substrings before the letter that you're
+deleting and after the letter that you're deleting.  So, for example, when you delete the 'o'
+from "word", you do it by creating the substrings "w" and "rd", and concatenating them.
+<p>
+Here's some C++ code that does the trick (i and j are ints).
+
+<p><center><table border=3 cellpadding=3><td><pre>
+  while (s.size() &gt; 0) {
+    i = s.size();
+    j = i/2;
+
+    /* If i is odd, then j is the index of the character that we're deleting, so
+       we do nothing in that case.
+
+       If i is even, then the two indices that we need to compare are j and j-1.
+       We want to set j to be the character that is the smaller of these two.
+       The statement below does this.  
+
+       When we're done with the statement, we want to put the character in s[j]
+       onto the back of t, and then delete it. */
+
+
+    if (i % 2 == 0 && s[j-1] &lt; s[j]) j--;
+      
+    printf("S = %s.  T = %s.  i = %d.  j = %d.\n", s.c_str(), t.c_str(), i, j);
+
+    t.push_back(s[j]);
+    s = s.substr(0, j) + s.substr(j+1);
+  }
+  printf("T = %s\n", t.c_str());
+}
+</pre></td></table></center><p>
+
+Here's what it prints out on examples 0 and 3:
+<p><center><table border=3>
+<td valign=top>
+<u>Example 0:</u><pre>
+S = word.  T = .  i = 4.  j = 1.
+S = wrd.  T = o.  i = 3.  j = 1.
+S = wd.  T = or.  i = 2.  j = 1.
+S = w.  T = ord.  i = 1.  j = 0.
+T = ordw</pre>
+</td>
+<td valign=top>
+<u>Example 3:</u><pre>
+S = shjegr.  T = .  i = 6.  j = 3.
+S = shjgr.  T = e.  i = 5.  j = 2.
+S = shgr.  T = ej.  i = 4.  j = 2.
+S = shr.  T = ejg.  i = 3.  j = 1.
+S = sr.  T = ejgh.  i = 2.  j = 1.
+S = s.  T = ejghr.  i = 1.  j = 0.
+T = ejghrs</pre>
+</td>
+</table></center><p>
+
+That works fine and solves the problem for Topcoder.  However, I want you to think
+about its running time.  Suppose that <b>s</b> originally has <i>n</i> characters.
+Then the <b>while()</b> loop will run <i>n</i> times, and each time, it is creating
+<b>s</b> from scratch.  At iteration <i>i</i>, the size of <i>s</i> is <i>n-i</i>, 
+which means that the amount of work that we're doing to create <i>s</i> overall
+is <i>n-1</i>, <i>n-2</i>, <i>n-3</i>, ..., 1.  This is the sum of one through <i>n-1</i>,
+which is equal to <i>n(n-1)/2</i>, or 1/2(n<sup>2</sup> - n)</i>.  We'll learn how
+to characterize this later in the semester, but let's think about it for 
+various values of <i>n</i>:
+
+<p><center><table border=3>
+<tr>
+<td align=center><i>n</i></td>
+<td align=center><i>n(n-1)/2</i></td>
+</tr>
+<tr>
+<td align=center>10</td>
+<td align=center>45</td>
+</tr>
+<tr>
+<td align=center>100</td>
+<td align=center>4,950</td>
+</tr>
+<tr>
+<td align=center>1000</td>
+<td align=center>499,500</td>
+</tr>
+<tr>
+<td align=center>10000</td>
+<td align=center>49,995,000</td>
+</tr>
+<tr>
+<td align=center>100000</td>
+<td align=center>4,999,950,000</td>
+</tr>
+</table>
+<p>
+</center>
+
+That's growing pretty quickly.  I gave my program a word that has 10,000 characters,
+(and took out the print statements), and it took 0.6 seconds.  On a word with 100,000
+characters, it took a minute and forty seconds!  That's too slow!
+
+<p>
+To fix this, let's try not to delete the character in <b>s</b>, or remake <b>s</b>.  Instead, 
+let's do the following.  The first time we look at <b>s</b>, if it's odd, we'll go ahead
+and do what we did before.  Now, <b>s</b> is even.  Let's set <b>i</b> to <b>s.size()/2</b>,
+and <b>j</b> to <b>i-1</b>.  Those are the characters to test.  Let's suppose that <b>s[j]</b>
+is less than <b>s[i]</b> -- we'll add <b>s[j]</b> to <b>t</b>, and then <b>s[i]</b>.  
+Otherwise, we'll add <b>s[i]</b> to <b>t</b>, and then <b>s[j]</b>.  
+And then we'll decrement <b>j</b> and increment <b>i</b>.  If we keep doing that until <b>j</b> 
+is -1, we'll have constructed <b>t</b> properly, and we haven't had to mess around with 
+creating a new <b>s</b> every time.  
+<p>
+Here's the relevant snippet of code:
+
+<p><center><table border=3 cellpadding=3><td><pre>
+  t = "";
+  i = s.size()/2;
+  j = i-1;
+  while (j != -1) {
+    if (s[j] &lt; s[i]) {
+      t.push_back(s[j]);
+      t.push_back(s[i]);
+    } else {
+      t.push_back(s[i]);
+      t.push_back(s[j]);
+    }
+    i++;
+    j--;
+  }
+</pre></td></table></center><p>
+
+When I run it on a 100,000 character string, it takes  0.02 seconds.  That's a <i>huge</i>
+difference!  We're going to see things like this time and time again in this class.
+It's called "algorithm analysis," and it's important, because it lets you predict how
+quickly your program will run, and figure out how to make it much faster.

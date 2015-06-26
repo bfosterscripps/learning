@@ -1,0 +1,73 @@
+<title>Notes on SRM 350, D2, 250-Pointer (DistanceBetweenStrings)</title>
+<h3>Notes on SRM 350, D2, 250-Pointer (DistanceBetweenStrings)</h3>
+<h3>James S. Plank</h3>
+Mon Jan 20 11:58:08 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=7606&rd=10674>Problem Statement</a>.<br>
+(CS140 early)
+<hr>
+This is your first in-lab Topcoder problem, so I'm writing these lecture notes to help
+walk you through solving it.  First, read the problem description and make sure
+that you understand what it's asking.  Go through each example, and make sure that you 
+know why each answer is correct.  With example 4, use math rather than 
+counting digits:
+<p>
+The answer is 5000, and the first string is all a's, while the second string is all b's.
+And the strings are the same size.  So, let that size be <i>s</i>.  You know that the
+distance between the two strings with respect to the character 'a' is <i>s<sup>2</sup></i>.
+And the
+distance between the two strings with respect to the character 'b' is also 
+<i>s<sup>2</sup></i>.  So, you need to find an <i>s</i> such that 
+<i>2s<sup>2</sup></i> equals 5000.   That means <i>s<sup>2</sup></i> equals 2500.   
+So <i>s</i> is 50: the first string is 50 a's, and the second is 50 b's.  Excellent.
+<hr>
+Now, let's start programming a solution.  Your first job is to set up the <b>DistanceBetweenStrings</b> class, which has a public method called <b>getDistance()</b>.  <b>getDistance()</b>
+should take three strings as parameters, and return an integer.  
+<p>
+Now, implement <b>getDistance()</b> so that it simply returns zero.  Get that to compile
+in the Topcoder app and test it.  You'll see that it gives the right answer for examples 1
+and 5.  Ha ha.  
+<hr>
+Now, update your program so that it goes through <b>a</b> and <b>b</b> and converts upper
+case to lower case.  Have it print out <b>a</b> and <b>b</b>, but still have it return 0.
+It won't be correct, but you can now test whether you did it correctly by looking at the
+output, especially for examples 3 and 5.  Remember from class -- you can test whether a
+character is uppercase by testing it against the characters 'A' and 'Z'.  Then you can 
+convert uppercase to lowercase by subtracting 'A' and adding 'a'.
+<hr>
+Now, go through every character in <b>letterSet</b>, and
+count the occurrences of that character in <b>a</b> and in <b>b</b>.
+Print that out.  You should still return 0 -- you just want to make sure you have 
+your code running correctly.  Here it is on all of the examples:
+
+<p><center><table border=3 cellpadding=3>
+<td align=center valign=top><u>Example 0</u><pre>
+t 1 2
+c 1 1
+p 1 0
+</pre></td>
+<td align=center valign=top><u>Example 1</u><pre>
+f 1 1
+e 1 1
+d 1 1
+</pre></td>
+<td align=center valign=top><u>Example 2</u><pre>
+a 5 0
+</pre></td>
+<td align=center valign=top><u>Example 3</u><pre>
+a 4 3
+b 1 2
+</pre></td>
+<td align=center valign=top><u>Example 4</u><pre>
+b 0 50
+a 50 0
+</pre></td>
+<td align=center valign=top><u>Example 5</u><pre>
+w 0 0
+x 0 0
+y 0 0
+z 0 0
+</pre></td>
+</table></center><p>
+<hr>
+Now finish your program by calculating the distances and returning the total.
+

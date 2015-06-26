@@ -1,0 +1,74 @@
+<title> CS140 -- Final Exam: Questions 1 - 3</title>
+
+<body bgcolor=FFFFFF>
+<h2> CS140 -- Final Exam: Questions 1 - 3</h2>
+<h3>December 15, 1998</h3>
+
+<table border=3 cellpadding=2>
+<TR>
+<TD valign=top>
+Questions 1-3 pertain to the following program, which takes an integer
+<i>n</i> on the command line.
+<pre>
+main(int argc, char **argv)
+{
+  int n, i, k;
+  int total;
+
+  if (argc != 2) exit(1);
+  n = atoi(argv[1]);
+  if (n < 0) exit(1);
+
+  total = -20;
+
+  for (i = 0; i <= n; i++) {
+    total++;
+    for (k = n; k > 1; k = k / 2) {
+      total++;
+    }
+  }
+  printf("%d\n", total);
+}
+</pre>
+</TD>
+<TD valign=top>
+<h2>Question 1 (2 points)</h2>
+
+What does the program print out when <i>n</i> is 4?  Write your answer
+on the answer sheet.
+<p>
+<hr>
+<h2>Question 2 (4 points)</h2>
+
+Exactly what does the program print out as a function of <i>n</i>?
+(e.g. it prints out <i>2n</i>, or <i>5n*n - 40</i>).
+If you want, you may assume that <i>n</i> is a power of two.
+
+</TD></TR>
+<TR>
+<TD colspan=2>
+<h2>Question 3 (9 points)</h2>
+
+Look at the table on the answer sheet.
+<p>
+Let the output of the program be <i>f(n)</i>.  
+<p>
+Each column of the table is a different function 
+<i>g(n)</i>.  
+There are four rows, one each for 
+<i>O(g(n))</i>, <i>Omega(g(n))</i>, <i>Theta(g(n))</i>, and 
+<i>o(g(n))</i>.  Your job is to put an X in the each entry of 
+the table where <i>g(n)</i> is has the proper relationship to <i>f(n)</i>.
+<p>
+For example, consider the first column, where <i>g(n) = 1</i>.  
+<UL>
+<LI> Put an X in the first row of that column if you believe <i>f(n) = O(1)</i>.
+<LI> Put an X in the second row of that column if you believe 
+      <i>f(n) = Omega(1)</i>.
+<LI> Put an X in the third row of that column if you believe 
+      <i>f(n) = Theta(1)</i>.
+<LI> Put an X in the fourth row of that column if you believe 
+      <i>f(n) = Theta(1)</i>.
+</UL>
+Fill in all entries of the table in this way.
+</TD></TR></TABLE>

@@ -1,0 +1,94 @@
+<UL>
+<LI> <b>Topcoder 250-Point problem from SRM 474, Division 1</b>
+<LI> James S. Plank
+<LI> Tue Mar 13 15:08:22 EDT 2012
+<LI> Problem description: <a href=http://community.topcoder.com/stat?c=problem_statement&pm=10804&rd=14185>http://community.topcoder.com/stat?c=problem_statement&pm=10804&rd=14185</a>
+<LI> Skeleton implementation: <a href="Skeleton.cpp">Skeleton.cpp</a>
+<LI> Main with examples: <a href="Main.cpp">Main.cpp</a>
+</UL>
+
+
+First, give the problem some thought, and see how you do.  If you are lost
+after 5 minutes or so, or don't know how to get started, then read on.
+<hr>
+The difficulty with this problem is dealing with the fact that you have
+potentially 1,000,000,000 dimensions to keep track of, and that seems daunting.
+However, let's think of the structure of a simple solution:
+<p>
+<UL>
+<LI> Somehow keep track of your current point, and all of your previous points.  
+<LI> Start with your current point being the origin.
+<LI> At each point, check to see if that point has been seen already.
+If so, return "NOT VALID".  
+<LI> Otherwise, update your previous points to include the current point.
+<LI> And update the current point to be the next point.
+</uL>
+
+You'd probably like to keep track of the current point with a vector
+of integers, one for each dimension.  However, with 1,000,000,000 dimensions,
+that's too big.  Instead, you can keep track of the current point with a
+map whose keys and vals are both integers.  Any entry in the map will have its
+key be the dimension and the val be the value of the point in that dimension.
+Any dimension not in the map will have a value of zero.  Thus, the origin
+can be represented with an empty map.  It can also be represented by any
+number of entries whose vals are zero.  
+<p>
+Start by putting such a map into the RouteIntersection class, and write the
+code that prints out the points on each iteration.  When you print a point, 
+just print the non-zero values in the form "[dimension,value]".  
+For example, Example 1 will go through the
+following points:
+
+<pre>
+""              -- I.e. point (0,0)
+"[1,1]"         -- I.e. point (1,0)
+"[1,1][2,1]"    -- I.e. point (1,1)
+"[2,1]"         -- I.e. point (0,1)
+""
+</pre>
+
+Example 2 will go through:
+
+<pre>
+""                -- I.e. point (0,0,0)
+"[1,1]"           -- I.e. point (1,0,0)
+"[1,1][2,1]"      -- I.e. point (1,1,0)
+"[1,1][2,1][3,1]" -- I.e. point (1,1,1)
+"[2,1][3,1]"      -- I.e. point (0,1,1)
+"[3,1]"           -- I.e. point (0,0,1)
+</pre>
+
+
+Now, instead of printing those points to standard output, use a stringstream
+to turn them into strings.  Each string represents a unique point, so you can
+keep a set of strings to represent the previous points, and you can use <b>find()</b>
+to look up the current point as a string.
+<p>
+So, now your program should have the following structure:
+<p>
+<UL>
+<LI> Represent the current point with a map that holds dimensions as keys, and
+values as vals.  It starts out empty, as the current point is the origin.
+<LI> Now, turn the current point into a string.  Look it up in the set.  If
+you find it, return "NOT VALID".
+<LI> Otherwise, insert it into the set, and then update the current point, and repeat.
+<LI> If you process all the moves, you can return "VALID."
+</UL>
+
+It is ok to have points in the map whose values are zero -- simply ignore them.
+It is easier to program it that way.
+For example, in Example 1 above, when you reach point (0,1), your map will have
+two values in it: [0,0] and [1,1].  However, when you print the point (or turn it
+into a string), you will ignore the [0,0] value.  You may be tempted to remove it from
+the map, but it is much easier to simply keep it there with a value of zero.
+<p>
+
+When I first did this one, in July, 2010, it took me 6 minutes for 230 points.
+<p>
+My second time, in September, 2010, took less time for 240 points!
+<p>
+When I did it the third time, for class prep in March, 2012, 
+it took me 12 minutes, as I made a mistake generating the string and had to submit twice.  
+Only 160 points or so...
+<p>
+My 2012 solution is in <b><a href="RouteIntersection.cpp">RouteIntersection.cpp</a></b>.

@@ -1,0 +1,31 @@
+<title> CS140 -- Final Exam: Questions 24 and 25</title>
+
+<body bgcolor=FFFFFF>
+
+<h2> CS140 -- Final Exam: Question 24 (4 points)</h2>
+
+Print out a postorder traversal of the following tree.
+<p>
+<IMG src="tree23.gif">
+
+<hr>
+<h2>Question 25 (8 points)</h2>
+
+Here is the typedef for a binary search tree:
+<pre>
+typedef struct bstreenode {
+  char *key;
+  Jval val;
+  struct bstreenode *left;
+  struct bstreenode *right;
+} BstreeNode;
+</pre>
+
+Write a function <b>nnodes</b>, which returns the number of nodes of
+a binary search tree.  The prototype is:
+<pre>
+int nnodes(BstreeNode *b);
+</pre>
+Note -- this is a pointer to the root of the tree (<b>NULL</b> if the
+tree is empty).
+

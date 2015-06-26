@@ -1,0 +1,23 @@
+<title>Hints for SRM 611, D2, 250-pointer (InterestingNumber)</title>
+<h3>Hints for SRM 611, D2, 250-pointer (InterestingNumber)</h3>
+<h3>James S. Plank</h3>
+Tue Mar  4 18:34:05 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=12911&rd=15843>Problem Statement</a>.
+<hr>
+I was surprised to see that only 52 percent of the Topcoders got this one
+correct.  It doesn't feel tricky to me.
+<p>
+As always, the key is to think precisely about how you are testing the string.  You 
+want to do the following for each digit from '0' through '9':
+
+<UL>
+<LI> Count the occurrences of the digit.  If it is zero, then you're fine and
+can move onto the next digit.  
+<LI> If it is non-zero, but not equal to two, then the number is not interesting.
+<LI> If it is equal to two, then you need to look at the indices of the digit, and
+test their difference.  If it is correct, then move onto the next digit.
+Otherwise, the number is not interesting.  Now, I want you to think about what "correct" means.  
+Do a few examples -- the pattern should be pretty clear.
+</UL>
+
+

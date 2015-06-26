@@ -1,0 +1,38 @@
+<html>
+<center>
+<h4>CS140 Midterm Exam - October 5, 2004 - Page 2</h4>
+</center>
+
+<hr>
+<h3>Question 2</h3>
+
+Behold <b>p2.c</b>:
+<p>
+<table border=3 cellpadding=3>
+<td>
+<pre>
+#include < stdio.h >
+#include "fields.h"
+
+main()
+{
+  IS is;
+  int i, j, k;
+  char *s;
+
+  is = new_inputstruct(NULL);
+
+  i = 0;
+  j = 0;
+  while (get_line(is) >= 0) {
+    s = is->fields[i%is->NF];
+    k = j%strlen(s);
+    printf("%c\n", s[k]);
+    i++;
+    j++;
+  }
+}
+</pre>
+</td></table>
+<p>
+What is the output of: <b>p2 < inputfile</b> 

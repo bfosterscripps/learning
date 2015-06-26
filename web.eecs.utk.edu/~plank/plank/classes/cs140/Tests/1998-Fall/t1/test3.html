@@ -1,0 +1,110 @@
+<title> CS140 -- Midterm Exam: Q8 - Q11</title>
+
+<body bgcolor=FFDCCC>
+
+<h1> CS140 -- Midterm Exam: Q8 - Q11</h1>
+<p>
+<TABLE border=7 cellpadding=3>
+<TD valign=top>
+The following code is for questions 8 through 11
+<pre>
+#include "fields.h"
+
+main()
+{
+  IS is;
+  int total;
+  int i, j;
+
+  is = new_inputstruct(NULL);
+  total = 0;
+
+  while (get_line(is) >= 0) {
+    for (i = 0; i < is->NF; i++) {
+      if (sscanf(is->fields[i], "%d", &j) == 1) {
+        total += ((i+1)*j);
+      } else {
+        fprintf(stderr, "Line %d field %d\n", 
+                is->line, i);
+        exit(1);
+      }
+    }
+  }
+  printf("%d\n", total);
+}
+</pre>
+</TD>
+<TD valign=top>
+  The following choices will be for questions 8 through 11.
+
+  <TABLE border=0>
+  <TR> <TD> <i>a.</i> </TD> <TD> <tt>5</tt> </TD> </TR>
+  <TR> <TD> <i>b.</i> </TD> <TD> <tt>10</tt> </TD> </TR>
+  <TR> <TD> <i>c.</i> </TD> <TD> <tt>15</tt> </TD> </TR>
+  <TR> <TD> <i>d.</i> </TD> <TD> <tt>20</tt> </TD> </TR>
+  <TR> <TD> <i>e.</i> </TD> <TD> <tt>22</tt> </TD> </TR>
+  <TR> <TD> <i>f.</i> </TD> <TD> <tt>23</tt> </TD> </TR>
+  <TR> <TD> <i>g.</i> </TD> <TD> <tt>28</tt> </TD> </TR>
+  <TR> <TD> <i>h.</i> </TD> <TD> <tt>37</tt> </TD> </TR>
+  <TR> <TD> <i>i.</i> </TD> <TD> <tt>38</tt> </TD> </TR>
+  <TR> <TD> <i>j.</i> </TD> <TD> <tt>50</tt> </TD> </TR>
+  <TR> <TD> <i>k.</i> </TD> <TD> <tt>Line 2 field 0</tt> </TD> </TR>
+  <TR> <TD> <i>l.</i> </TD> <TD> <tt>Line 2 field 1</tt> </TD> </TR>
+  <TR> <TD> <i>m.</i> </TD> <TD> <tt>Line 2 field 2</tt> </TD> </TR>
+  <TR> <TD> <i>n.</i> </TD> <TD> <tt>Line 2 field 3</tt> </TD> </TR>
+  <TR> <TD> <i>o.</i> </TD> <TD> Segmentation Violation </TD> </TR>
+  </TABLE>
+</TD>
+</TABLE>
+
+
+<hr>
+<TABLE border=7 cellpadding=3>
+<TR><TD valign=top>
+<b>Question 8</b>: 
+What is the output of the above program when the input is:
+<hr>
+<pre>1 2 3
+  4 5
+</pre>
+<hr>
+</TD>
+
+<TD valign=top>
+<b>Question 9</b>: 
+What is the output of the above program when the input is:
+<hr>
+<pre>
+1 2 3
+0 Jim Plank
+0 4 5
+</pre>
+<hr>
+</TD></TR>
+
+<TR><TD valign=top>
+<b>Question 10</b>: 
+What is the output of the above program when the input is:
+<hr>
+<pre>
+1 2 3
+# 0 Jim Plank
+0 4 5
+</pre>
+<hr>
+</TD>
+
+<TD valign=top>
+<b>Question 11</b>: 
+What is the output of the above program when the input is (the second line
+is blank):
+<hr>
+<pre>
+1 2 3
+
+4
+0 2
+</pre>
+<hr>
+</TD></TR></TABLE>
+

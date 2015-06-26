@@ -1,0 +1,22 @@
+<title>Hints for SRM 607, D2, 250-pointer (BoundingBox)</title>
+<h3>Hints for SRM 607, D2, 250-pointer (BoundingBox)</h3>
+<h3>James S. Plank</h3>
+Mon Feb  3 19:24:45 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=12990&rd=15840>Problem Statement</a>.
+<hr>
+
+Let's see if the examples can give us some inspiration.  Example 0 is pretty obvious and 
+Example 1 is pretty clear from their picture.  Let's look at example 2 drawn on graph paper:
+
+<p><center><table border=0><td><img src="BB.jpg"></td></table></center><p>
+
+See the pattern?  
+
+<UL>
+<LI> The rectangle's left side will be on the minimum X value.
+<LI> The rectangle's right side will be on the maximum X value.
+<LI> The rectangle's bottom side will be on the minimum Y value.
+<LI> The rectangle's top side will be on the maximum Y value.
+</UL>
+
+So, you need to calculate those minimum and maximum values and use them to calculate the area.

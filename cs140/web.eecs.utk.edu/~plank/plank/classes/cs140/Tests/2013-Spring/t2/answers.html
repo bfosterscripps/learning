@@ -1,0 +1,261 @@
+<center>
+<h3>2013 CS140 Final Exam - Answers and Grading</h3>
+<h3>James S. Plank</h3>
+</center>
+
+<font size=-1>
+<hr>
+<h3>Question 1 - Basic Programming - 10 Points</h3>
+
+Here you simply read the lines and put them into a data structure
+which allows you to retain the last <i>n</i> lines efficiently.  It's
+not easy with a vector, because you cannot insert or delete
+efficiently from the front of a vector -- you do better to use a
+<b>deque</b> or <b>list</b> from the STL, or a <b>Queue</b> or
+<b>Dlist</b> from the lecture notes/labs.  In the code below, I
+create the deque in reverse order, and then create the return vector
+from it
+(this in <b><a href="http://web.eecs.utk.edu/~plank/plank/classes/cs140/Tests/2013-Spring/t2/q1.cpp">q1.cpp</a></b>):
+
+<p><center><table border=3 cellpadding=3><td><pre><font size=-1>
+#include &lt;vector&gt;
+#include &lt;deque&gt;
+#include &lt;string&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+vector &lt;string&gt; get_n_lines(int n)
+{
+  vector &lt;string&gt; rv;
+  deque &lt;string&gt; q;
+  string s;
+  int i;
+
+  while (getline(cin, s)) {
+    q.push_front(s);
+    if (q.size() &gt; n) q.pop_back();
+  }
+  for (i = 0; i &lt; q.size(); i++) rv.push_back(q[i]);
+  return rv;
+}
+</pre></td></table></center><p>
+
+<h3>Grading</h3>
+
+<UL>
+<LI> Did you use a correct data structure?  Deque, Queue or List was worth 6 points, Vector and Stack were worth three points. Set was worth two, and anything else zero.
+<LI> Was your solution <i>O(n)</i> in space?  This was worth two points.
+In other words, even if you used a 
+Deque, if you simply created it with <b>push_front()</b> and didn't 
+make sure that its maximum size was <i>n</i>, you didn't get these two points.
+<LI> Did you set up a return value of the correct type and return it?  One point.
+<LI> Did you create the return value correctly?  One point.
+</UL>
+
+<p><center><table border=3><td><img src="q.1.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 2 - Basic Data Structures and Big-O - 12 Points</h3>
+
+<UL>
+<LI> <b>A</b>: Finding an item in a AVL tree with <i>n</i> items: <i>O(log(n))</i>
+<LI> <b>B</b>: Erasing the first item from a linked list with <i>n</i> items: Linked lists work in constant time: <i>O(1)</i>
+<LI> <b>C</b>: Performing a rotation on a node in an AVL tree with <i>n</i> items: Rotations manipulate a constant 
+    number of pointers: <i>O(1)</i>
+<LI> <b>D</b>: Deleting an item from an AVL tree with <i>n</i> items. <i>O(log(n))</i>
+<LI> <b>E</b>: Finding an item in a regular binary search tree with <i>n</i> items.  The search tree can be a search line: <i>O(n)</i>
+<LI> <b>F</b>: Erasing the first item from a deque with <i>n</i> items.  Deques do this in constant time: <i>O(1)</i>
+<LI> <b>G</b>: Deleting an item from a set with <i>n</i> items.  Sets and maps are just like AVL trees: <i>O(log n)</i>
+<LI> <b>H</b>: Finding an item that is in a hash table with <i>n</i> items that had no collisions when the items were inserted.
+If there were no collisions, then every key is at its hash value in the hash table.  Therefore, it will take constant time to 
+find it: <i>O(1)</i>
+<LI> <b>I</b>: Calling <b>Push()</b> on a stack with <i>n</i> items.  Again, <i>O(1)</i> -- see the answer to Question 5.
+<LI> <b>J</b>: Inserting an item into a map with <i>n</i> items. <i>O(log(n))</i>
+<LI> <b>K</b>: Erasing the first item from a vector with <i>n</i> items.  Vectors don't support this in constant time: <i>O(n)</i>
+<LI> <b>L</b>: Finding an item in a linked list with <i>n</i> items.  To find an item in a linked list, you have to traverse the
+list from the front: <i>O(n)</i>
+</UL>
+
+Grading: 1 point per question.  In your grade files, I used the following abbreviations:
+<UL>
+<LI> "1" = O(1)
+<LI> "l" = O(log(n))
+<LI> "n" = O(n)
+<LI> "nl" = O(n(log(n))
+<LI> "2" = O(n<sup>2</sup>)
+<LI> "!" = O(n!)
+</UL>
+
+<p><center><table border=3><td><img src="q.2.jpg" width=400><p>
+<img src="q2-details.jpg" width=400></td></table></center><p>
+
+<hr>
+<h3>Question 3 - Were you in this class? - 10 Points</h3>
+
+Straight from the lecture notes:
+
+<p><center><table border=3 cellpadding=3><td><pre><font size=-1>
+void Solve(Towers *t, int from, int to, int npieces)
+{
+  int i, other;
+
+  if (npieces == 1) {
+    t-&gt;Make_Move(from, to);
+    return;
+  }
+
+  for (i = 0; i &lt; 3; i++) if (i != from && i != to) other = i;
+  Solve(t, from, other, npieces-1);
+  t-&gt;Make_Move(from, to);
+  Solve(t, other, to, npieces-1);
+}
+</pre></td></table></center><p>
+
+Grading was subjective here.  I gave you some credit if you at least gave me a base
+case and some recursion, but not much if it wasn't too cogent.
+
+<p><center><table border=3><td><img src="q.3.jpg" width=400></td></table></center><p>
+
+<hr>
+<h3>Question 4 - Binary search trees 10 points</h3>
+
+I quote from the lecture notes:
+<p>
+<b>Case 1</b>: The node has no children (it's a leaf node).  You can simply
+delete it.  
+<p>
+<b>Case 2</b>: The node has just one child.  To delete the node, replace it
+with that child.  
+
+<p>
+<b>Case 3</b>: The node has two children.  In this case, you find the node
+in the tree whose value is the greatest value less than (or equal to) the node's
+value.  That will be the rightmost node in the subtree rooted by the left child.
+That node will not have a right child.  First, delete it.  Then use it to replace
+the node that you are deleting.
+
+<h3>Grading</h3>
+
+<UL>
+<LI> Case 1: 3 points
+<LI> Case 2: 3 points
+<LI> Case 3: 4 points
+</UL>
+
+<p><center><table border=3><td><img src="q.4.jpg" width=400></td></table></center><p>
+
+<hr>
+<h3>Question 5 - Stack em up - 10 points</h3>
+
+Again, straight from the lecture notes:
+
+<p><center><table border=3 cellpadding=3><td><pre><font size=-1>
+void Stack::Push(string s)
+{
+  Stacknode *newnode;
+
+  newnode = new Stacknode;
+  newnode->s = s;
+  newnode->next = top;
+  top = newnode;
+}
+
+string Stack::Pop()
+{
+  string rv;
+  Stacknode *oldtop;
+
+  if (top == NULL) {
+    cerr << "Error: pop() called on an empty stack\n";
+    exit(1);
+  }
+
+  oldtop = top;
+  top = oldtop->next;
+  rv = oldtop->s;
+  delete oldtop;
+  return rv;
+}
+</pre></td></table></center><p>
+
+<h3>Grading</h3>
+
+Five points for each method.
+
+<p><center><table border=3><td><img src="q.5.jpg" width=400></td></table></center><p>
+
+<hr>
+<h3>Question 6 - Traversals - 12 Points</h3>
+
+<UL>
+<LI> Tree 1: Preorder: J D H F T P L K N R V X -- <i>k</i>
+<LI> Tree 1: Postorder: F H D K N L R P X V T J -- <i>g</i>
+<LI> Tree 2: Preorder: J F D H R L K P N V T X -- <i>m</i>
+<LI> Tree 2: Postorder: D H F K N P L T X V F J -- <i>d</i>
+</UL>
+
+<h3>Grading</h3>
+
+Three points per traversal. 
+
+<p><center><table border=3><td><img src="q.6.jpg" width=400></td></table></center><p>
+
+<hr>
+<h3>Question 7 - Traversals - 12 points</h3>
+
+<b>Tree 1:</b> When you insert <b>N</b>, you get the left tree below.  That is imbalanced at node <b>J</b>, and it's 
+a Zig-Zag, so you must perform a double-rotation about node <b>L</b> to get the right tree. 
+The answer is <b>I</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-AB.jpg"></td>
+<td valign=top> <img src="AVL-AC.jpg"></td></table></center><p>
+
+<b>Tree 2:</b> When you delete <b>M</b>, you replace it with <b>L</b>.  That tree is fine, so the 
+answer is <b>J</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-A8.jpg"></td></table></center><p>
+
+<b>Tree 3:</b> When you insert <b>X</b>, you get the left tree below.  That is imbalanced at node <b>T</b>, and it's 
+a Zig-Zig, so you must perform a rotation about node <b>V</b> to get the right tree. 
+The answer is <b>L</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-AA.jpg"></td>
+<td valign=top> <img src="AVL-A9.jpg"></td></table></center><p>
+
+<b>Tree 4:</b> When you delete <b>G</b>, you get the left tree below.  That is imbalanced at node <b>J</b>, and it's 
+a Zig-Zag, so you must perform a double rotation about node <b>P</b> to get the right tree. 
+The answer is <b>F</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-A3.jpg"></td>
+<td valign=top> <img src="AVL-AF.jpg"></td></table></center><p>
+
+
+<b>Tree 5:</b> When you delete <b>W</b>, you get the left tree below.  That is imbalanced at node <b>V</b>, and it's 
+a Zig-Zig, so you must perform a single rotation about node <b>R</b> to get the right tree. 
+The answer is <b>L</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-A5.jpg"></td>
+<td valign=top> <img src="AVL-A9.jpg"></td></table></center><p>
+
+
+<b>Tree 6:</b> When you delete <b>B</b>, you get an imbalance about <b>D</b>, which you fix
+by a double-rotation about <b>G</b>.  That is pictured to the left.  That is imbalanced at node <b>J</b>, and it's 
+a Zig-Zag, so you must perform a double rotation about node <b>P</b> to get the right tree. 
+The answer is <b>F</b>.
+
+<p>
+<center><table border=3>
+<td valign=top> <img src="AVL-A3.jpg"></td>
+<td valign=top> <img src="AVL-AF.jpg"></td></table></center><p>
+
+<p><center><table border=3><td><img src="q.7.jpg" width=400><p>
+<img src="q7-details.jpg" width=400></td></table></center><p>

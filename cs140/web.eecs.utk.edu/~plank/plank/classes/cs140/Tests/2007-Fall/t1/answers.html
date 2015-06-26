@@ -1,0 +1,288 @@
+<title>CS140 Midterm Exam - October 4, 2007 - Answers & Grading</title>
+<center>
+<h2>CS140 Midterm Exam - October 4, 2007 - Answers & Grading</h2>
+<p>
+<h3>James S. Plank</h3>
+</center>
+<hr>
+<h3>Question 1 - 10 points</h3>
+
+<b>Part 1</b>:
+
+The program is in <a href="pex.c"><b>pex.c</b></a>.
+<p>
+<b>Argv[1]</b> is "Curious-George".  The first thing I'd do is put each letter over its
+array index:
+<p>
+<center>
+<table border=3 cellpadding=3>
+<td align=center><tt>C</tt><br>0</td>
+<td align=center><tt>u</tt><br>1</td>
+<td align=center><tt>r</tt><br>2</td>
+<td align=center><tt>i</tt><br>3</td>
+<td align=center><tt>o</tt><br>4</td>
+<td align=center><tt>u</tt><br>5</td>
+<td align=center><tt>s</tt><br>6</td>
+<td align=center><tt>-</tt><br>7</td>
+<td align=center><tt>G</tt><br>8</td>
+<td align=center><tt>e</tt><br>9</td>
+<td align=center><tt>o</tt><br>10</td>
+<td align=center><tt>r</tt><br>11</td>
+<td align=center><tt>g</tt><br>12</td>
+<td align=center><tt>e</tt><br>13</td>
+</table>
+</center>
+<p>
+Ok, now <b>s</b> and <b>argv[1]</b> are the same: 0xbfffedd8.  <b>V</b> will be a pointer
+to the first occurrence of 'G', which is 8 characters past <b>s</b>: 0xbfffede0.  That
+'G' is turned into a 'g', and then we move <b>v</b> forward 5 characters to 0xbfffede5, 
+which is a pointer to the final 'e'.  That gets changed to an 'i'.
+<p>
+Since <b>u</b> was created with <b>strdup()</b>, it has a copy of "Curious-George", which
+is unaffected by <b>v</b>.  The <b>strstr()</b> statement will return a pointer to the
+"ge" in <b>u</b>, which starts at the 12th character from the beginning of <b>u</b>.
+Thus, the <b>strstr()</b> returns 0x3000fc.  
+<p>
+Here's the output:
+
+<p><center><table border=3 cellpadding=3><td><pre>
+UNIX> <b>pex Curious-George Prince-George Eddie-George</b>
+0xbfffedd8 0x3000f0
+argc: 4
+argv[1]: 0xbfffedd8 Curious-georgi
+s: 0xbfffedd8 Curious-georgi
+u: 0x3000f0 Curious-George
+v: 0xbfffede5 i
+strstr: 0x3000fc ge
+</pre></td></table></center><p>
+
+<b>Part 2</b>:
+
+One problem is that <b>argc</b> is not checked -- if you call <b>pex</b> will
+no arguments, the <b>strchr()</b> statement will probably generate a seg fault or
+bus error.  
+<p>
+The second problem is if <b>argv[1]</b> contains a 'G' within five characters
+of the end of the string -- then the "<b>*v = 'i';</b> statement will stomp
+over memory that is not part of the string.
+
+<h3>Grading</h3>
+
+Each line was worth 1 point, and there was partial credit given.  Part 2 was worth 
+four points, two for each answer.  The answers had to be distinct. 
+
+<p>
+<center>
+<table border=4 cellpadding=5>
+<td>
+<h4>Histogram of scores for Question 1</h4>
+<IMG src="Q1.jpg" width=500>
+</td>
+</table>
+</center>
+
+<hr>
+<h3>Question 2 - 10 points</h3>
+
+The first two are straightforward.  The last requires you to store
+<b>n->link</b> into a temporary variable before freeing <b>n</b>.
+
+<p><center><table border=3 cellpadding=3><td><pre>
+List *new_list()
+{
+  List *l;
+
+  l = (List *) malloc(sizeof(List));
+  if (l == NULL) { perror("malloc"); exit(1); }
+  l->front = NULL;
+  l->back = NULL;
+  l->size = 0;
+  return l;
+}
+
+void list_prepend(List *l, Jval v)
+{
+  Node *n;
+
+  n = (Node *) malloc(sizeof(Node));
+  if (n == NULL) { perror("malloc"); exit(1); }
+  n->val = v;
+  n->link = l->front;
+  l->front = n->link;
+  l->size++;
+  if (l->size == 1) l->back = n;
+}
+
+void free_list(List *l) 
+{
+  Node *n, *n2;
+
+  n = l->front;
+  while (n != NULL) {
+    n2 = n;
+    n = n->link;
+    free(n2);
+  }
+  free(l);
+}
+</pre></td></table></center><p>
+
+<h3>Grading</h3>
+
+<UL>
+<LI> <b>new_list()</b>: 1 point for malloc/testing the return value.  1 point 
+for setting <b>front</b> and <b>back</b> to NULL, 1 point for setting 
+<b>size</b> to zero and returning the new list.
+<p>
+<LI> <b>list_prepend()</b>: 1 point for malloc/testing the return value.
+1 point for hooking the new node onto the front of the list properly,
+1 point for setting <b>size</b> and <b>val</b> correctly, and one
+point for setting <b>back</b> when the list was empty.
+<p>
+<LI> <b>list_free()</b>: 1 point for a proper <b>while()</b> loop, 
+1 point for freeing individual nodes and the list itself, and 1 point
+for not getting your pointers mixed up and using a pointer that you
+have already freed.  If you made some mistakes that didn't fit this
+framework, I simply took off points that reflected how much I thought
+your solution made sense.  
+</UL>
+
+<u>Comments</u>: This one messed up a lot of folks.  I was surprised at how many 
+of y'all did not call <b>malloc()</b> at all, and how many of you wrote
+pretty random solutions to <b>list_free()</b>.  I all but told you a
+problem like this would be on the test -- I was surprised at how unprepared
+a lot of you were for it.
+
+<p>
+<center>
+<table border=4 cellpadding=5>
+<td>
+<h4>Histogram of scores for Question 2</h4>
+<IMG src="Q2.jpg" width=500>
+</td>
+</table>
+</center>
+
+<hr>
+<h3>Question 3 - 5 points</h3>
+
+In the header file that I present to the other programmers, I would
+make sure that my data structure is represented by a <b>(void *)</b>.
+In my implementation, I have the real <b>struct</b> definition of 
+my data structure.  When I allocate my data structure, I cast it
+to a <b>(void *)</b> and pass that as a return value.  When programmers
+call my procedures with my data structure, they will pass me a <b>(void *)</b>,
+and the first thing that my procedures do is cast it to the proper <b>struct</b>.
+In that way, they can use my data structure, but they cannot modify it 
+except by calling my procedures.
+
+<h3>Grading</h3>
+
+<UL>
+<LI> Two points for talking about setting up prototypes or typedefs to <b>(void *)</b> in the
+header file.
+<LI> One point for saying you put the real definition into the source file that implements
+the header file.
+<LI> One point for saying that the source will cast to and from the <b>(void *)</b>.
+<LI> One point for saying that in this way the users can't mess with the data.
+</UL>
+
+<p>
+I was pretty flexible on where I took off points here -- as with <b>free_list()</b>, I 
+basically took off enough points so that your score reflected how good your answer was,
+and tried to take them off in the parts that showed where your answer was lacking.
+
+<p>
+<center>
+<table border=4 cellpadding=5>
+<td>
+<h4>Histogram of scores for Question 3</h4>
+<IMG src="Q3.jpg" width=500>
+</td>
+</table>
+</center>
+
+
+<hr>
+<h3>Question 4 - 10 points</h3>
+
+The program is in 
+<b><a href="q4.c">q4.c</a></b> and the input file is in
+<b><a href="q4-input.txt">q4-input.txt</a></b>.
+<p>
+
+This is a straightforward program.  It reads from standard input until
+it reads a blank line or EOF, at which point it exits.  For all the
+non-blank lines that it reads, it pushes the characters of the first
+word onto a stack, onto a queue, and to the beginning and end of a linked
+list.  This means that when we pop the characters off the stack, we will
+get them in reverse order.  When we dequeue them, we will get them in the 
+proper order.  And if we look at the list, it will contain the characters
+in reverse order followed by the characters in their proper order.
+<p>
+So, on the first line of standard input, the queue will hold '1', the
+stack will hold '1' and the list will hold '1','1'.  The first line of
+output will be "1111".
+<p>
+On the second line of standard input, we will have:
+<p><center><table border=3 cellpadding=3><td>
+q: F, r, e, d<br>
+s: d, e, r, F<br>
+l: d, e, r, F, F, r, e, d
+</td></table></center><p>
+Therefore, line two of output is:
+<pre>
+Fdde rerF erFr dFed
+</pre>
+On the third line of standard input, we will have:
+<p><center><table border=3 cellpadding=3><td>
+q: E, d, d, i, e<br>
+s: e, i, d, d, E<br>
+l: e, i, d, d, E, E, d, d, i, e
+</td></table></center><p>
+Therefore, line three of output is:
+<pre>
+Eeei didd ddEE iddd eEie
+</pre>
+The program will exit on line 4.
+<p>
+Therefore the output is:
+<p><center><table border=3 cellpadding=3><td><pre>
+1111
+Fdde rerF erFr dFed
+Eeei didd ddEE iddd eEie
+</pre></td></table></center><p>
+
+<h3>Grading</h3>
+
+I tried to break down the grading so that you got points for important
+parts of the code-reading exercise.  What I came up with was:
+<p>
+
+<UL>
+<LI> If it looked like you had some clue about what was going on: 1 point
+<LI> If you gave three lines of output: 1 point
+<LI> If the letters of your output were composed only of the letters from the first word of each line of input: 1 point
+<LI> If each line contained as many words as there were letters on the first word of that line: 1 point
+<LI> If each word had exactly four characters: 1 point
+<LI> If I saw "Fred" and "Eddie" somewhere coherent: 1 point
+<LI> If I saw "derF" and "eiddE" somewhere coherent: 1 point
+<LI> If you got the other details correct: 3 points
+</UL>
+<p>
+The problem came when you got caught on the fact that the program is putting
+characters on the various data structures, and not whole words.  That led
+to the worst scores, but of course, that shows that you're making a 
+fundamental mistake, as opposed to, for example, writing five lines of 
+output rather than three, which is simply a missed detail.
+
+<p>
+<center>
+<table border=4 cellpadding=5>
+<td>
+<h4>Histogram of scores for Question 4</h4>
+<IMG src="Q4.jpg" width=500>
+</td>
+</table>
+</center>
+

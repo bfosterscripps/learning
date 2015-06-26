@@ -1,0 +1,317 @@
+<title> CS140 -- Final Exam - Answers and Grading</title>
+
+<body bgcolor=FFFFFF>
+<h2> CS140 -- Final Exam.  December 10, 2008 - Answers & Grading</h3>
+
+<hr>
+<h2>Question 1 - 7 points</h2>
+
+<b>Part 1</b>: You have to split the first external node into two nodes.
+This would put an extra link coming from the root node, which means 
+that it too must be split.  Here's the result:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="B-Tree-Ans.jpg">
+</td></table></center><p>
+
+Some of you simply shifted the 9 into the next external node.  While that
+results in a correct B-tree, and it is an optimization, that is not the 
+basic B-Tree operation.  
+
+<b>Part 2</b>: The point of B-trees is to store data on disk.  For them
+to work efficiently, nodes should all fit within one disk block, which is
+a fixed size.  Internal nodes hold keys and links.  External nodes hold
+keys and data.  Therefore, a different number
+of keys/links than keys/data may fit into a single disk block.  This means
+that different values of <i>M</i> may be required for internal and external nodes.
+
+<h3>Grading</h3>
+
+<UL>
+<LI> <b>Part 1</b>: Splitting the external node: 1 point
+<LI> <b>Part 1</b>: Getting the external keys right: 1 point
+<LI> <b>Part 1</b>: Splitting the internal node: 1 point
+<LI> <b>Part 1</b>: Getting the internal keys right: 2 points
+<LI> <b>Part 2</b>: 3 points, allocated to how coherent and correct
+I thought your answer was.
+</UL>
+<p><center><table border=3 cellpadding=3><td><IMG src="1.jpg" width=600></pre></td></table></center><p>
+
+<hr>
+<h2>Question 2 - 7 points</h2>
+
+<b>Part 1</b>: "Teachers" has a hash value of 47, so it should go into index 47%16 = 15.
+Since there is a value already there, we try index 0.  There is a value there, and in 
+indoces 1 and 2, so we put "Teachers" into index 3.  "Critics" has a hash value of 
+170, so it should go into index 170%16 = 10.  There is a value there, but not in index
+11, so it should go there.  The answer:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Hash-Ans.jpg" height=200>
+</td></table></center><p>
+
+<b>Part 2</b>: Try to insert something with a hash value of 1.  That index
+is occupied, so you try index 1+1*1 = 2.  That's occupied, so you now try
+index 1+2*2 = 5.  Also occupied, so you try index 1+3*3 = 10.  That's
+occupied too, so now you try 1+4*4 = 17, which equals 1 mod 16.  Hmmmm.
+1+5*5 = 26%16 = 10.  1+6*6 = 37%16 = 5.  1+7*7 = 50%16 = 2.  You will 
+keep getting this cycle, over and over, and you will never be able to
+put the value into the hash table, even though it is largely empty.  To 
+fix this, change your table size to be prime.  Then you have no problems.
+<p>
+
+<b>Extra Credit</b>: This is from Devo's classic song "Jocko Homo," from
+the album "Q: Are We Not Men? A: We Are Devo!" 0.5 points.  
+<p>
+<center><img src="P04983EJGLI.jpg"></center><p>
+
+I always enjoy seeing the guesses that y'all make.  Those of you who study from
+past exams figured that 70's prog rock bands are a good guess, and in general
+you're right, but not here.  Here were your guesses:
+<p>
+<UL>
+<LI> <b>Pink Floyd</b>.  Five students guessed this. I'm guessing it's that "Brick in the Wall" song, which does
+feature the word "Teachers".  Had I gone for Pink Floyd, I would have mined "Have
+a Cigar," with its excellently acerbic wit.
+<LI> <b>King Crimson</b>.  Two students guessed this. Had I used King Crimson, I would have definitely mined
+"21st Century Schizoid Man", with lines like "Innocence raped with Napalm fire."
+<LI> <b>David Bowie</b>.  My high school girlfriend was in love with David Bowie.  Therefore,
+I hate him, and would never use him for lyrics.  Of course, you couldn't have known
+that..
+<LI> <b>The Who</b>.  Not a bad guess, as Pete Townshend could get a little pedantic with his
+lyrics.
+<LI> <b>Bjork?</b>
+<LI> <b>The Beatles.  </b>
+<LI> <b>John Lennon.</b>
+<LI> <b>Scrantonicity.</b>
+<LI> <b>Jocko Pin</b> - I always admire a good guess.
+<LI> <b>One of the many artists in the files from Lab C.</b>  Correct, albeit imprecise.
+<LI> <b>Celine Dion and Michael Bolton on their joint album called 'Crap-tastic.'</b>  I'm still laughing
+as I'm typing.
+<LI> <b>An obscure 70's band no one but Dr. Plank likes!!! Or possibly the theme to Neopets.</b>  
+Devo obscure???? I think not!!!!!  That said, "Jocko Homo" was released in 1978...
+
+</UL>
+
+
+<h3>Grading</h3>
+
+<UL>
+<LI> <b>Part 1</b>: Teachers: 2 points
+<LI> <b>Part 1</b>: Critics: 2 points
+<LI> <b>Part 2</b>: Coming up with the pathelogical example: 2 points
+<LI> <b>Part 2</b>: Fixing the problem: 1 point.  If you said make the table
+bigger, you only got 0.25 points.
+</UL>
+
+<p><center><table border=3 cellpadding=3><td><IMG src="2.jpg" width=600></pre></td></table></center><p>
+<hr>
+
+<hr>
+<h2>Question 3 - 6 points</h2>
+
+<i>f(x)</i>, g(x)<i> and </i>h(x)</i> are all equivalent from a big-O perspective, because they 
+increase linearly as <i>x</i> gets large.  Therefore, A, B, D, E, G and H are all true.  
+The last function, <i>j(x)</i>, has a maximum value of three.  Unlike the others, it does not
+go to infinity as <i>x</i> grows.  Therefore, it is a smaller function than the others.  
+Since smaller functions are big-O of bigger functions, this means that J, K and L are true 
+too.  So the answer is A, B, D, E, G, H, J, K and L.
+
+<h3>Grading</h3>
+
+You got 0.5 points for assigning each potential answer correctly.  Since there are 12
+potential answers, that's a total of 6 points.
+
+<p><center><table border=3 cellpadding=3><td><IMG src="3.jpg" width=600></pre></td></table></center><p>
+<hr>
+<h2>Question 4 - 2 points</h2>
+
+When <b>D</b> is first inserted into the splay tree, it gets put as the right child of <b>C</b>:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Splay-A1.jpg" width=150>
+</td></table></center><p>
+
+It now must be splayed.  It is in a zig-zag position, so you perform a double rotation
+about it:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Splay-A3.jpg" width=150>
+</td></table></center><p>
+
+Since its parent is the root node, you now need to perform a single rotation.  Here is
+the answer (answer <b>I</b>):
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Splay-A4.jpg" width=150>
+</td></table></center><p>
+
+
+<h3>Grading</h3>
+
+Two points for <b>I</b>.  Half a  point for A, D or E.
+<p><center><table border=3 cellpadding=3><td><IMG src="4.jpg" width=600></pre></td></table></center><p>
+
+<hr>
+<h2>Question 5 - 3 points</h2>
+
+When <b>R</b> is first inserted into the splay tree, it gets put as the right child of <b>P</b>:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Second-A1.jpg" width=150>
+</td></table></center><p>
+
+It now must be splayed.  It is in a zig-zig position, so you rotate about <b>P</b>, and
+then about <b>R</b>:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Second-A7.jpg" width=150>
+</td></table></center><p>
+
+Since its parent is the root node, you now need to perform a single rotation.  Here is
+the answer (answer <b>H</b>):
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="Second-A5.jpg" width=150>
+</td></table></center><p>
+
+
+<h3>Grading</h3>
+
+Two points for <b>H</b>.  Half a point for B, D, F or I.
+<p><center><table border=3 cellpadding=3><td><IMG src="5.jpg" width=600></pre></td></table></center><p>
+
+<hr>
+<h2>Question 6 - 3 points</h2>
+
+When <b>G</b> is first inserted into the AVL tree, it gets put as the left child of <b>H</b>:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="AVL-A1.jpg" width=150>
+</td></table></center><p>
+
+Now we move to the root, trying to find a height imbalance.  There is no imbalance
+at <b>H</b>, <b>F</b> or <b>D</b>, but there is at the root.  This is solved
+by a double-rotation about <b>F</b>  The answer is therefore <b>I</b>:
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="AVL-A4.jpg" width=150>
+</td></table></center><p>
+
+<h3>Grading</h3>
+
+Two points for <b>I</b>.  No points for the others.
+<p><center><table border=3 cellpadding=3><td><IMG src="6.jpg" width=600></pre></td></table></center><p>
+
+<hr>
+<h2>Question 7 - 7 points</h2>
+
+<b>Parts A-C</b>: To perform <b>disjoint_find()</b>, you chase the <b>links</b> until 
+you get to a node whose <b>link</b> field is -1.  Therefore:
+<p>
+<UL>
+<LI> <b>disjoint_find(dj, 0)</b> will return 4.
+<LI> <b>disjoint_find(dj, 1)</b> will return 1.
+<LI> <b>disjoint_find(dj, 2)</b> will return 4.
+<LI> <b>disjoint_find(dj, 4)</b> will return 4.
+</UL>
+
+Therefore, the answers will be no, yes and yes.
+<p>
+For <b>Part D</b>, we want to either make <b>links[4] = 7</b> or 
+<b>links[7] = 4</b>, and we want to update <b>ranks</b> and <b>sizes</b>
+accordingly.  Since we are doing "union by rank", we make the one with the
+smaller <b>rank</b> the child of the one with the higher rank.  Therefore,
+<b>links[7]</b> is set to 4.  We need to update <b>sizes[4]</b> to be
+(<b>sizes[4]</b>+<b>sizes[7]</b>), so <b>sizes[4]</b> is set to 6.  
+We don't need to update <b>ranks[4]</b> because it is greater than <b>ranks[7]</b>.
+<p>
+Finally, we need to decrement <b>nsets</b>.
+
+
+<p><center><table border=3 cellpadding=3><td>
+<IMG src="http://web.eecs.utk.edu/~plank/plank/classes/cs140/Tests/2007-Fall/t2/UF-ANS.jpg">
+</td></table></center><p>
+
+<h3>Grading</h3>
+
+One point for each of parts A, B and C.  Part D: 1 point for setting <b>links[7]</b> to 4,
+one point for setting <b>sizes[4]</b> to 6, 1 point for decrementing <b>nsets</b> 
+and 1 points for doing nothing else.  You got a half a point if you made 7 the parent instead of 4.
+<p><center><table border=3 cellpadding=3><td><IMG src="7.jpg" width=600></pre></td></table></center><p>
+<hr>
+<h2>Question 8 - 4 points</h2>
+
+My apologies for the problems some of you had understanding the problem.  
+I wanted a recursive enumeration and not a program that read standard input
+(I would have said "lines on standard input" if that's what I meant).  Regardless, I should 
+have given an example.  Here's the answer (in <b><a href="q8.c">q8.c</a></b>).
+I've reduced the point value of this one because of the confusion, but if you answered
+the other problem correctly, you received full credit.
+
+<p><center><table border=3 cellpadding=3><td><pre>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+void enum_strings(char *s, int a, int b, int start)
+{
+  if (a == 0 && b == 0) {
+    s[start] == '\0';
+    printf("%s\n", s);
+    return;
+  }
+  if (a &gt; 0) {
+    s[start] = 'A';
+    enum_strings(s, a-1, b, start+1);
+  }
+  if (b &gt; 0) {
+    s[start] = 'B';
+    enum_strings(s, a, b-1, start+1);
+  }
+}
+
+main(int argc, char **argv)
+{
+  char *s;
+  int a, b;
+
+  if (argc != 3 || sscanf(argv[1], "%d", &a) == 0 || 
+                   sscanf(argv[1], "%d", &b) == 0 || 
+                   a &lt; 0 || b &lt; 0) {
+    fprintf(stderr, "usage: q8 a b\n");
+    exit(1);
+  }
+
+  s = (char *) malloc(sizeof(char) * (a + b + 1));
+  enum_strings(s, a, b, 0);
+}
+</pre></td></table></center><p>
+
+
+<h3>Grading</h3>
+
+<UL>
+<LI> Parsing the command line arguments: 1 point
+<LI> Getting the rest of the details right: 3 points
+</UL>
+<p><center><table border=3 cellpadding=3><td><IMG src="8.jpg" width=600></pre></td></table></center><p>
+
+<hr>
+<h2>Question 9 - 5 points</h2>
+
+This is a very straightforward recursive tree traversal.
+
+<p><center><table border=3 cellpadding=3><td><pre>
+int tree_size(Node *n)
+{
+  int size;
+  size = 1;
+  for (i = 0; i < n->nchildren; i++) size += tree_size(n->children[i]);
+  return size;
+}
+</pre></td></table></center><p>
+
+<h3>Grading</h3>
+This one is pretty much hit or miss.  You got points according to how well
+I thought your solution was on mark.
+<p><center><table border=3 cellpadding=3><td><IMG src="8.jpg" width=600></pre></td></table></center><p>

@@ -1,0 +1,234 @@
+<center>
+<h3>CS140 Final Exam - May 6, 2011 - Answers & Grading</h3>
+</center>
+<hr>
+<h3>Question 1</h3>
+
+This is straightforward.  First, you need to double-check that
+the node is not the sentinel.  Next, you unhook it from the list
+by setting its previous node's <b>blink</b> pointer to its
+<b>blink</b> pointer, and then the subsequent node's <b>flink</b>.
+pointer to its <b>flink</b>.  Finally, you <b>delete</b> the node and
+update the list's size.
+
+<p><center><table border=3 cellpadding=3><td><font size=-1><pre>
+void Dlist::Erase(Dnode *n)
+{
+  if (n == sentinel) {
+    cerr &lt;&lt; "You shouldn't delete the sentinel\n";
+    exit(1);
+  }
+  
+  n-&gt;flink-&gt;blink = n-&gt;blink;
+  n-&gt;blink-&gt;flink = n-&gt;flink;
+  delete n;
+  size--;
+}
+</pre></td></table></center><p>
+
+Grading:
+
+<UL>
+<LI> Sentinel check: 1 point
+<LI> n->flink->blink = n->blink: 1.5 points
+<LI> n->blink->flink = n->flink: 1.5 points
+<LI> delete n: 1 point
+<LI> size--: 1 point
+</UL>
+
+<p><center><table border=3><td><img src="q1-h.jpg" width=400></td></table></center><p>
+<hr>
+
+<h3>Question 2</h3>
+
+<UL>
+<LI> <b>A:</b>  You want to insert it into index 8, but that is full, so you check 9, then find
+an empty slot at index 0.  The answer is index 0, two probes (or three).
+<p>
+<LI> <b>B:</b>  You want to insert it into index 4, but that is full, so you find
+an empty slot at index 5.  The answer is index 5, one probe (or three).
+<p>
+<LI> <b>C:</b>  You want to insert it into index 8, so you probe 8+1<sup>2</sup> = 9, then 
+(8+2<sup>2</sup>)%10 = 2, and finally( 8+3<sup>2</sup>)%10 = 7.  
+The answer is index 7, three probes (or four).
+<p>
+<LI> <b>D:</b>  You want to insert it into index 4, so you probe 4+1<sup>2</sup> = 5, which is
+free.  The answer is index 5, one probe (or two).
+
+<p>
+<LI> <b>E:</b>  You want to insert it into index 8, so you probe (8+1*4)%10 = 2, then 
+(8+2*4)%10 = 6, then (8+3*4)%10 = 0.  
+The answer is index 0, three probes (or four).
+<p>
+<LI> <b>F:</b>  You want to insert it into index 4, so you probe (4+1*8)%10 = 2, then 
+(4+2*8)%10 = 0.  The answer is index 0, two probes (or three).
+</UL>
+
+Grading: 0.5 points for the index and 0.5 for the probes.  For the probe
+values, I used whichever gave you more points, as long as it was consistent.
+<p><center><table border=3><td><img src="q2-h.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 3</h3>
+
+<b>Part A:</b> This program prints out the last half of the lines of standard input.  It pushes
+every line at the end of <b>lh</b>, and then for every other line, it deletes the
+first element of <b>lh</b>.  Thus, the output is:
+
+<p><center><table border=3 cellpadding=3><td><font size=-1><pre>
+D
+E
+F
+G
+</pre></td></table></center><p>
+
+<b>Part B:</b> The difference between deques and vectors is that deques allow for efficient
+insertion and deletion from both ends of the data structure.  Vectors only allow for efficient pushing and popping from the rear of the data structure.  Therefore, if the vector is size <i>n</i>, then
+the <b>erase()</b> operation will be <i>O(1)</i> for deques but <i>O(n)</i> for vectors.  So
+the vector implementation is far worse.  The difference in performance will be most marked 
+when standard input has a lot of lines.  For example, with 100000 lines, the deque version will
+run with roughly 100,000 operations.  The vector version will take roughly 10,000,000,000 operations.  
+<p>
+To exemplify, in this directory, the vector version is in
+<b><a href="tailhalfv.cpp">tailhalfv.cpp</a></b>
+and the deque version is in 
+<b><a href="tailhalfd.cpp">tailhalfd.cpp</a></b>.  The file <b>input.txt</b> is 100,000 lines:
+
+<pre>
+UNIX> <font color=darkred><b>time tailhalfd < input.txt > /dev/null</b></font>
+0.183u 0.034s 0:00.22 95.4%	0+0k 0+0io 0pf+0w
+UNIX> <font color=darkred><b>time tailhalfv < input.txt > /dev/null</b></font>
+30.543u 0.111s 0:31.08 98.6%	0+0k 0+0io 0pf+0w
+UNIX> <font color=darkred><b></b></font>
+</pre>
+
+Grading: 2 points for the output, 2 points for the explanation, 2 points for the
+input file/explanation.
+
+<p><center><table border=3><td><img src="q3-h.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 4</h3>
+
+From the definition of big-O, we need to prove that there exist positive constants <i>c</i>
+and <i>x<sub>0</sub></i> such that for all values of <i>x &gt; x<sub>0</sub></i>:
+<p><center>
+<i>7x + 45 &lt; cx</i>
+</center><p>
+
+We can choose easy values: <i>c = 100</i> and <i>x<sub>0</sub></i> = 1.  At that point,
+<i>7x+45</i> is equal to 52, and <i>100x</i> is equal to 100.  As <i>x</i> increases,
+<i>100x</i> grows faster than <i>7x+45</i>.  Thus, for all values of <i>x</i> greater than one,
+<i>7x + 45 &lt; 100x</i>, and therefore <i>7x+45 = O(x)</i>.  
+
+<p>Grading: 3 points for the big-O definition, 2 points for choosing <i>c</i>
+and <i>x<sub>0</sub></i>, 1 point for tying it all together.
+<p><center><table border=3><td><img src="q4-h.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 5</h3>
+
+<b>Part A:</b>We simply build by finding where each number would go, and then putting it there.
+Here is the construction.  The final answer is the tree in the blue box:
+
+<p><center><table border=3><td><img src="Q5-PartA.jpg" width=500></td></table></center><p>
+
+<b>Part B:</b>
+
+<UL>
+<LI> <b>Preorder</b>: it's, alright, all, gonna, feel, out, night, stay.
+<LI> <b>Postorder</b>: all, feel, gonna, alright, night, stay, out, it's.
+</UL>
+
+<b>Part C:</b> Since the node has two children, you find the greatest node in the
+left subtree "gonna," delete it and then replace "it's" with "gonna".
+
+<p><center><table border=3><td><img src="Q5-PartC.jpg" width=300></td></table></center><p>
+
+You could have replaced "it's" with "night" too.
+
+<p>
+<b>Grading:</b> 2 points for parts A and C, 2 points for each traversal.
+<p><center><table border=3><td><img src="q5-h.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 6</h3>
+
+First, let's annotate each node with its height:
+
+<p><center><table border=3><td><img src="Q6-PartA-1.jpg" width=400></td></table></center><p>
+
+Now, this is an AVL tree if the difference between the height of each node's children is at 
+most one.  This is true for every node on the tree (if a node's child is empty, its height is
+-1), so the tree is indeed an AVL tree.
+<p>
+When we insert "what", we traverse each node on the path from 
+"what" to the root, readjust the height if
+necessary and check the balance condition.  When we do this, we see that "is" is not balanced:
+
+<p><center><table border=3><td><img src="Q6-PartB-1.jpg" width=400></td></table></center><p>
+
+This is a zig-zig imbalance, so we rotate once about "that" to yield the following tree:
+
+<p><center><table border=3><td><img src="Q6-PartB-2.jpg" width=400></td></table></center><p>
+
+<b>Grading</b>: 2 points for the definition, 2 points for labeling the tree so that it
+matches the definition, 2 points for the insertion.
+<p><center><table border=3><td><img src="q6-h.jpg" width=400></td></table></center><p>
+<hr>
+<h3>Question 7</h3>
+
+This problem is perfect for a map.  The map should be keyed on names and have the number
+of votes as the val.  We create it by traversing the <b>votes</b> array, and if the
+person hasn't voted for himself/herself, incrementing the number of votes in the map.
+<p>
+Next, traverse the map to find the maximum number of votes in the map.  
+<p>
+Finally, traverse the map again and find out who has that number of votes.
+If more than one person has it, return the empty string immediately.  Otherwise,
+return the person.  The code is in 
+<b><a href="topcode.cpp">topcode.cpp</a></b>:
+
+<p><center><table border=3 cellpadding=3><td><font size=-1><pre>
+string RabbitVoting::getWinner(vector &lt;string&gt; names, vector &lt;string&gt; votes)
+{
+  map &lt;string, int&gt; v;
+  map &lt;string, int&gt;::iterator vit;
+  int i;
+  string winner;
+
+  <font color=darkred>// Determine everyone's number of votes:</font>
+
+  for(i = 0; i &lt; votes.size(); i++) {
+    if (votes[i] != names[i]) v[votes[i]]++;
+  }
+
+  <font color=darkred>// Find the maximum number of votes:</font>
+
+  i = 0;
+  for (vit = v.begin(); vit != v.end(); vit++) {
+    if (vit-&gt;second &gt; i) i = vit-&gt;second;
+  }
+
+  <font color=darkred>// Find the winner, returning "" if there is more than one:</font>
+
+  winner = "";
+  for (vit = v.begin(); vit != v.end(); vit++) {
+    if (vit-&gt;second == i) {
+      if (winner != "") return "";
+      winner = vit-&gt;first;
+    }
+  }
+  return winner;
+}
+</pre></td></table></center><p>
+
+You could have tried running through the <b>names</b> vector, counting the
+legal votes for each <b>names[i]</b> by running through the <b>votes</b> 
+vector, and then returning the person with the maximum.  However, that would
+be <i>O(n<sup>2</sup>)</i>, and would run too slowly given that <b>names</b>
+can have 100000 elements.
+
+<p>
+Grading: 4 points for calculating votes, 4 points for calculating the max and returning
+the correct name.  If you did the 
+<i>O(n<sup>2</sup>)</i> algorithm, you lost a point and I didn't explain it, so 
+if you're confused as to why you lost a point on the first part, that's probably
+the explanation.
+<p><center><table border=3><td><img src="q7-h.jpg" width=400></td></table></center><p>

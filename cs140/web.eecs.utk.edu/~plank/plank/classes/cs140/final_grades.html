@@ -1,0 +1,83 @@
+<center>
+<h1>CS140 Final Grades - Spring 2014</h1>
+<h2>James S. Plank</h2>
+<p>
+</center>
+<hr>
+
+<hr>
+
+My grading scale is as follows:
+
+<UL>
+<LI> A+: 95 - 100
+<LI> A: 90 - 95
+<LI> A-: 87 - 90
+<LI> B+: 83 - 87
+<LI> B: 80 - 83
+<LI> B-: 77 - 80
+<LI> C+: 73 - 77
+<LI> C: 70 - 73
+<LI> C-: 67 - 70
+<LI> D+: 63 - 67
+<LI> D: 60 - 63
+<LI> D-: 57 - 60
+<LI> F: 0-57
+</UL>
+
+Your lab score is converted directly to this scale by multiplying by 100/1200.
+<p>
+Lab attendance was out of 100 (# attendances * 100 / 14).
+<p>
+To convert the midterms and final to a score, 
+I use the following routine:
+
+<p><center>
+<table border=3>
+<td><pre>double A = 90.0;
+double B = 80.0;
+double C = 70.0;
+double D = 60;
+
+double test_convert(double score, double top, double a, 
+                    double b, double c, double d)
+{
+  if (score >= a) {
+    return (score - a)/(top - a) * (100.0-A) + A;
+  } else if (score >= b) {
+    return (score - b)/(a - b) * (A-B) + B;
+  } else if (score >= c) {
+    return (score - c)/(b - c) * (B-C) + C;
+  } else if (score >= d) {
+    return (score - d)/(c - d) * (C-D) + D;
+  } else {
+    return (score)/d * (D);
+  }
+}</pre></td></table></center><p>
+
+The midterm scores are converted with:
+<pre>
+  test_convert(yourscore, 85, 70, 60, 50, 40);
+</pre>
+and the final scores are convered with:
+<pre>
+  test_convert(yourscore, 75, 60, 48, 38, 20);
+</pre>
+<p>
+I counted the midterm and the final 25% each, the labs 45%, and the attendance 5%. 
+<p>
+Final grade tally:
+<UL>
+<LI> A+: 19
+<LI> A: 22
+<LI> A-: 7
+<LI> B+: 10
+<LI> B: 4
+<LI> B-: 4
+<LI> C+: 6
+<LI> C: 0
+<LI> C-: 3
+<LI> D+: 0
+<LI> D: 3
+<LI> F: Hard to say, since there are a lot of drops.
+</UL>

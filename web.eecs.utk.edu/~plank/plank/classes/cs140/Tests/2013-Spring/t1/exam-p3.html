@@ -1,0 +1,150 @@
+<font size=-1>
+<center><h3>CS140 Midterm Page 3</h3></center>
+<hr>
+
+<h3>Question 6 - Vectors and Pointers</h3>
+
+Below, I have three header files that specify the types <b>L</b> and <b>LVec</b>, and
+the prototype for a procedure <b>print_LVec()</b>.  An <b>LVec</b> is a nested data
+structure with vector at the top level.  The vector contains either lists or pointers
+to lists, and the lists contain either doubles or pointers to doubles.
+The procedure <b>print_LVec()</b> is supposed to print out all of the doubles, one per line.
+
+<table border=3 cellpadding=3>
+
+<p>
+<td><font size=-1>
+<b><a href="header-1.h">header-1.h</a></b>
+<pre>
+typedef list &lt;double *&gt; L;
+typedef vector &lt;L&gt; LVec;
+
+void print_LVec(LVec &v);
+</pre></td>
+
+<td><font size=-1>
+<b><a href="header-2.h">header-2.h</a></b>
+<pre>
+typedef list &lt;double&gt; L;
+typedef vector &lt;L *&gt; LVec;
+
+void print_LVec(LVec &v);
+</pre></td>
+<td><font size=-1>
+<b><a href="header-3.h">header-3.h</a></b>
+<pre>
+typedef list &lt;double *&gt; L;
+typedef vector &lt;L *&gt; LVec;
+
+void print_LVec(LVec &v);
+</pre></td>
+</table>
+
+<p>
+Below are six implementations of <b>print_LVec()</b>. 
+For each of these implementations, and each header file above, choose one of the
+multiple choice answers below about how the implementation compiles and runs
+with the header file:
+<OL>
+<LI> The implementation compiles correctly with the header file, and they print the 
+doubles correctly without making any extraneous copies of the lists.
+<LI> The implementation/header compile and print correctly,
+but they make extra copies of the lists.
+<LI> The implementation/header compile correctly, but they print something
+other than the doubles.
+<LI> The implementation/header do not compile correctly because there are problems in the
+<b>for</b> loops.
+<LI> The implementation/header do not compile correctly because there
+is a problem that is not in a for loop.
+</OL>
+
+
+<table border=3 cellpadding=3>
+<tr><td valign=top><font size=-1><pre>
+void print_LVec(LVec &v)    // Implementation A 
+{
+  int i;
+  L::iterator lit;
+  L *lp;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    lp = v[i];
+    for (lit = lp-&gt;begin(); lit != lp-&gt;end(); lit++) {
+      cout &lt;&lt; *lit &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+<td valign=top><font size=-1> <pre>
+void print_LVec(LVec &v)    // Implementation B 
+{
+  int i;
+  L::iterator lit;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    for (lit = v[i].begin(); lit != v[i].end(); lit++) {
+      cout &lt;&lt; *(*lit) &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+</tr>
+<tr><td valign=top><font size=-1> <pre>
+void print_LVec(LVec &v)    // Implementation C 
+{
+  int i;
+  L::iterator lit;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    for (lit = v[i]-&gt;begin(); lit != v[i]-&gt;end(); lit++) {
+      cout &lt;&lt; *(*lit) &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+<td valign=top><font size=-1> <pre>
+void print_LVec(LVec &v)    // Implementation D 
+{
+  int i;
+  L::iterator lit;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    for (lit = v[i]-&gt;begin(); lit != v[i]-&gt;end(); lit++) {
+      cout &lt;&lt; *lit &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+</tr>
+<tr><td valign=top><font size=-1> <pre>
+void print_LVec(LVec &v)    // Implementation E 
+{
+  int i;
+  L::iterator lit;
+  L *lp;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    lp = v[i];
+    for (lit = lp.begin(); lit != lp.end(); lit++) {
+      cout &lt;&lt; *lit &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+<td valign=top><font size=-1> <pre>
+void print_LVec(LVec &v)    // Implementation F 
+{
+  int i;
+  L::iterator lit;
+  L lp;
+
+  for (i = 0; i &lt; v.size(); i++) {
+    lp = v[i];
+    for (lit = lp.begin(); lit != lp.end(); lit++) {
+      cout &lt;&lt; *(*lit) &lt;&lt; endl;
+    }
+  }
+}
+</pre></td>
+</tr>
+</table>

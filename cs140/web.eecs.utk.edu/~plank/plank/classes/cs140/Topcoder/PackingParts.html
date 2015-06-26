@@ -1,0 +1,20 @@
+<title>Hints for SRM 297, D2, 250-pointer (PackingParts)</title>
+<h3>Hints for SRM 297, D2, 250-pointer (PackingParts)</h3>
+<h3>James S. Plank</h3>
+Sun Feb 16 14:03:09 EST 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=6139&rd=9818>Problem Statement</a>.
+<hr>
+
+The vectors are already sorted, so you should have two indices: <i>i</i> for parts and <i>j</i> for
+boxes.  Start them both at zero. Then you simply run through their steps:
+
+<UL>
+<LI> Try to match part <i>i</i> with box <i>j</i>.  
+<LI> If part <i>i</i> is too big, keep incrementing <i>j</i> until either <i>j</i> is the 
+size of the box vector,
+or the part fits into box <i>j</i>.
+<LI> If <i>j</i> is the size of the box vector, return <i>i</i>.
+<LI> If not, increment <i>i</i> and <i>j</i>.
+<LI> When <i>i</i> is as big as the parts vector, return <i>i</i>.
+<UL>
+

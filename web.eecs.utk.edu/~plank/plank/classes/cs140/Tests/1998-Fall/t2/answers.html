@@ -1,0 +1,509 @@
+<title> CS140 -- Final Exam: Answers and Grading Guide</title>
+
+<body bgcolor=FFFFFF>
+<h2> CS140 -- Final Exam: Answers and Grading Guide</h2>
+<h3>December 15, 1998</h3>
+
+<h2>Question 1</h2>
+
+The code is in <a href="q1.c"><b>q1.c</b></a>.  Run it if you have
+any questions.
+<p>
+Start with -20.  Then add 5 for the first 
+``<b>total++</b>.''  Then add 5*2 for the second one.  The total is -5.
+Run the code yourself (add some print statements) if you're confused.
+<p>
+You got 2 points for answering -5.  One point for -8.
+
+<h2>Question 2</h2>
+
+Similarly, you start with -20, then you'll iterate <i>n+1</i> times
+in the outer loop.  This will increment <b>total</b> <i>n+1</i> times.
+Assume <i>n</i> is a power of two. 
+The inner loop runs <i>log(n)</i> times.  Thus, you'll get 
+<i>(n+1)log(n)</i> iterations of the inner loop.  The final value of
+total is therefore:
+<center>
+<p>
+<i>-20 + (n+1) + (n+1)log(n) = n*log(n) + n  + log(n) - 19</i>
+<p>
+</center>
+<p>
+You got 4 points for answering <i>n*log(n) + n  + log(n) - 19</i> 
+or its equivalent.  You got 3 points for <i>n*log(n) + n - 20</i>, 
+2 points if you gave something that was <i>Theta(n*log(n))</i>,
+and one point if youf answer had a <i>log(n)</i> in it.
+
+<h2>Question 3</h2>
+
+The biggest term is the <i>n*log(n)</i> term.  Therefore:
+<p>
+<TABLE border=3 cellpadding=2>
+<TR>
+<TD align=right>.</TD>
+<TD><i>g(n) = 1</i></TD>
+<TD><i>g(n) = log(n)</i></TD>
+<TD><i>g(n) = n</i></TD>
+<TD><i>g(n) = n*log(n)</i></TD>
+<TD><i>g(n) = n*n</i></TD>
+</TR>
+<TR>
+<TD><i>f(n) = O(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Omega(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Theta(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = o(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+</TR>
+</TABLE>
+<p>
+Grading here went as follows.  You got four points total for 
+big-O terms, two points for the <i>Omega</i> terms, two points for
+the <i>Theta</i> term, one point for little-o.
+You were penalized for marking incorrect boxes.  
+<p>
+You were graded relative to the answer you put down in Question 2.
+Thus, if you put down something where the dominant term is <i>n*n</i>,
+then your answer should have been:
+<p>
+<TABLE border=3 cellpadding=2>
+<TR>
+<TD align=right>.</TD>
+<TD><i>g(n) = 1</i></TD>
+<TD><i>g(n) = log(n)</i></TD>
+<TD><i>g(n) = n</i></TD>
+<TD><i>g(n) = n*log(n)</i></TD>
+<TD><i>g(n) = n*n</i></TD>
+</TR>
+<TR>
+<TD><i>f(n) = O(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Omega(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Theta(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = o(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+</TABLE>
+<p>
+If your answer to question two had a dominant term that is linear,
+then your answer should have been:
+<p>
+<TABLE border=3 cellpadding=2>
+<TR>
+<TD align=right>.</TD>
+<TD><i>g(n) = 1</i></TD>
+<TD><i>g(n) = log(n)</i></TD>
+<TD><i>g(n) = n</i></TD>
+<TD><i>g(n) = n*log(n)</i></TD>
+<TD><i>g(n) = n*n</i></TD>
+</TR>
+<TR>
+<TD><i>f(n) = O(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Omega(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Theta(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = o(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+</TABLE>
+<p>
+If your answer to question two had a dominant term that is <i>log(n)</i>,
+then your answer should have been:
+<p>
+<TABLE border=3 cellpadding=2>
+<TR>
+<TD align=right>.</TD>
+<TD><i>g(n) = 1</i></TD>
+<TD><i>g(n) = log(n)</i></TD>
+<TD><i>g(n) = n</i></TD>
+<TD><i>g(n) = n*log(n)</i></TD>
+<TD><i>g(n) = n*n</i></TD>
+</TR>
+<TR>
+<TD><i>f(n) = O(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Omega(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Theta(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = o(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+</TABLE>
+<p>
+And finally, if your answer to question two had a dominant term that is 
+constant, then your answer should have been:
+<p>
+<TABLE border=3 cellpadding=2>
+<TR>
+<TD align=right>.</TD>
+<TD><i>g(n) = 1</i></TD>
+<TD><i>g(n) = log(n)</i></TD>
+<TD><i>g(n) = n</i></TD>
+<TD><i>g(n) = n*log(n)</i></TD>
+<TD><i>g(n) = n*n</i></TD>
+</TR>
+<TR>
+<TD><i>f(n) = O(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Omega(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = Theta(g(n))</i></TD>
+<TD align=right>X</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+<TD align=right>.</TD>
+</TR>
+<TR>
+<TD><i>f(n) = o(g(n))</i></TD>
+<TD align=right>.</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+<TD align=right>X</TD>
+</TR>
+</TABLE>
+<p>
+
+
+<hr>
+<h2>Question 4</h2>
+<IMG src="tree04.gif">
+<p>
+Grading: 2 points for getting it right.
+
+<hr>
+<h2>Question 5</h2>
+First you insert the <b>R</b>, and the tree looks as in Question 4.  
+This is imbalanced around node <b>G</b>, and needs to be fixed with
+a double rotation about node <b>P</b>:
+<p>
+<IMG src="tree05.gif">
+<p>
+Grading: 4 points for getting it right.  2 points if you had a
+valid AVL tree (with all the right elements).  Zero otherwise.
+
+<hr>
+<h2>Question 6</h2>
+First you insert the <b>T</b>, and the tree looks as in the left
+diagram below.  
+This is imbalanced around node <b>G</b>, and needs to be fixed with
+a single rotation about node <b>S</b>:
+<p>
+<IMG src="tree06.gif">
+<p>
+Grading: 4 points for getting it right.  2 points if you had a
+valid AVL tree (with all the right elements).  Zero otherwise.
+
+<hr>
+<h2>Question 7</h2>
+First you insert the <b>R</b>, and the tree looks as in the left
+diagram below.  
+Now you have to splay <b>R</b> to the top.  First you do a double
+rotation about <b>R</b> as depicted, and then <b>R</b> is one node
+from the root.  You get it to the root with a single rotation about
+node <b>R</b>.
+<p>
+<IMG src="tree07.gif">
+<p>
+Grading: 4 points for getting it right.  2 points for a valid tree
+with <b>R</b> at the root.
+
+<hr>
+<h2>Question 8</h2>
+First you insert the <b>A</b>, and the tree looks as in the left
+diagram below.  
+Now you have to splay <b>A</b> to the top.  This is done with a
+<i>zig-zig</i> transformation -- rotate about <b>B</b> and then
+about <b>A</b>:
+<p>
+<IMG src="tree08.gif">
+<p>
+Grading: 4 points for getting it right.  2 points for a valid tree
+with <b>A</b> at the root.
+
+<hr>
+<h2>Questions 9-20</h2>
+Two points each.
+<UL>
+<LI> <b>Question 9</b>: <i>a</i> (constant time).
+<LI> <b>Question 10</b>: <i>c</i> -- you may get up to <i>n</i> collisions.
+     One point for answering <i>a</i>.
+<LI> <b>Question 11</b>: <i>c</i> -- the tree does not have to be balanced.
+     One point for answering <i>b</i>.
+<LI> <b>Question 12</b>: <i>b</i> -- one of the nice properties of a balanced
+       binary tree.
+<LI> <b>Question 13</b>: <i>c</i> -- the tree is not always balanced.  See
+        the book for examples.
+     One point for answering <i>b</i>.
+<LI> <b>Question 14</b>: <i>d</i> -- this is the nice property of splay
+        trees.
+<LI> <b>Question 15</b>: <i>a</i> -- a constant number of pointer swaps.
+<LI> <b>Question 16</b>: <i>b</i>.
+<LI> <b>Question 17</b>: <i>d</i>.  <i>n</i> operations at <i>O(log(n))</i>
+     each.
+<LI> <b>Question 18</b>: <i>e</i> -- if you insert <i>n</i> elements that
+      are already sorted, your tree will have depth <i>n</i>.
+     One point for answering <i>d</i>.
+<LI> <b>Question 19</b>: <i>c</i> -- use recursion -- you make one call
+      per node.  One point for answering <i>d</i>, since this you had
+      to deal with the red herring of the <b>flink</b>
+     and <b>blink</b> pointers.
+<LI> <b>Question 20</b>: <i>c</i> -- obviously linear with the <b>flink</b>
+     and <b>blink</b> pointers.
+</UL>
+
+<hr>
+<h2>Question 21</h2>
+
+The answer is <i>e</i>.  First collision is at 71, which goes into entry 2.
+Then at 52, 10 and 4 which go into entries 4, 5 and 6 respectively.
+<p>
+No partial credit.
+<hr>
+<h2>Question 22</h2>
+
+The answer is <i>f</i>.  First collision is at 71, which goes into entry 2.
+Next is 52, which looks at entry 3 and finds it occupied, so it looks at
+entry 2+4=6, and goes there.  10 then collides at entries 0 and 1 and
+then looks at entry 0+4=4, and puts it there.  
+Finally, 4 collides with 10 and goes into entry 5.
+<p>
+No partial credit.
+
+<hr>
+<h2>Question 23</h2>
+<p>
+The correct answers are <i>b</i>, <i>d</i>, <i>e</i> and <i>g</i>.  The
+only really tricky one is <i>g</i>.  Think about it.
+<p>
+Grading was as follows: 2 points for each right answer.  -2 for each 
+wrong answer.  Minimum score was zero.
+
+<hr>
+<h2>Question 24</h2>
+<p>
+The ordering of calls is:
+<pre>
+visit(X)
+  visit(R)
+    visit(M)
+      visit(G)
+        print(G)
+      visit(P)
+        print(P)
+      print(M) 
+    visit(V)
+      visit(U)
+        visit(T)
+          print(T)
+        print(U)
+      visit(W)
+        print(W)
+      print(V)
+    print(R)
+  print(X)
+</pre>
+This makes:
+<pre>
+G
+P
+M
+T
+U
+W
+V
+R
+X
+</pre>
+You got 4 points for that.  
+2 points for a reverse postorder traversal (<b>WTUVPGMRX</b>).
+Otherwise, you got a point if the last thing printed was <b>X</b>.
+<hr>
+<h2>Question 25</h2>
+<pre>
+int nnodes(BstreeNode *b) {
+  if (b == NULL) return 0;
+  return 1 + nnodes(b->left) + nnodes(b->right);
+}
+</pre>
+8 points for something that works, like the above.  6 points if
+you forget to test for <b>NULL</b>.  2 points for something recursive.
+0 otherwise.
+
+<hr>
+<h2>Question 26</h2>
+This is really easy -- just push onto the front of the list and
+pop off the front.  Since dllists and stacks are both <b>(void *)</b>'s,
+you don't even need to cast, so I didn't take off if you omitted casting. 
+<pre>
+#include < stdio.h >
+#include "dllist.h"
+
+Stack new_stack()
+{
+  return (Stack) new_dllist();
+}
+
+free_stack(Stack s)
+{
+  free_dllist((Dllist) s);
+}
+
+int stack_empty(Stack s)
+{
+   return dll_empty((Dllist) s);
+{
+
+stack_push(Stack s, Jval val)
+{
+  dll_prepend((Dllist) s, val)
+}
+
+Jval stack_pop(Stack s)
+{
+  Jval retval;
+
+  retval = stack_top(s);
+  dll_delete_node(dll_first((Dllist) s));
+  return retval;
+}
+
+Jval stack_top(Stack s)
+{
+  if (stack_empty(s)) {
+    fprintf(stderr, "Error: trying to look at the top of an empty stack\n");
+    exit(1);
+  }
+  return (dll_val(dll_first((Dllist) s)));
+}
+</pre>
+Point allocation was as follows:
+<UL>
+<LI> Two points for <b>new_stack()</b>.
+<LI> Two points for <b>free_stack()</b>.
+<LI> Two points for <b>stack_empty()</b>.
+<LI> Three points for <b>stack_push()</b>.
+<LI> Four points for <b>stack_pop()</b>, allocated as follows:
+<UL> 
+<LI> One for error checking (or letting <b>stack_top()</b> error check
+     for you).
+<LI> One for saving the value in the first node.
+<LI> Two for getting the <b>dll_delete_node()</b> right.
+</UL>
+<LI> Four points for <b>stack_top()</b>, allocated as follows:
+<UL> 
+<LI> One for error checking (or letting <b>stack_top()</b> error check
+     for you).
+<LI> One for finding the front of the list correctly.
+<LI> Two for returning the right thing (not the node, but the <b>val</b> field).
+</UL>
+</UL>
+

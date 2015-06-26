@@ -1,0 +1,92 @@
+<title> CS140 -- Final Exam: Q08 - Q13</title>
+
+<body bgcolor=FFFFFF>
+<h3> Questions 08-13<br>
+CS140 Final Exam: May 10, 1999</h3>
+
+The following code fragments are for questions 8-13.<br>
+Assume that <i>i, j, </i> and <i>n</i> are all integers.
+<p>
+<table border=4 cellpadding=5>
+<TR>
+<TD>
+(a)
+<pre>
+
+for (i = 0; i < n*n; i++) {
+  printf("\n");
+}
+</pre></TD>
+
+<TD>
+(b)
+<pre>
+
+for (i = 0; i < n; i += 5) {
+  printf("\n");
+}
+</pre></TD>
+
+</TR>
+<TR>
+
+<TD valign=top>
+(c)
+<pre>
+
+for (i = 1; i < n; i *= 2) {
+  printf("\n");
+}
+</pre></TD>
+
+<TD valign=top>
+(d)
+<pre>
+
+for (i = 1; i < n; i *= 2) {
+  for (j = 3; j < 4n+5 ; j++) {
+    printf("\n");
+  }
+}
+</pre></TD>
+
+
+</TR>
+<TR>
+
+<TD valign=top>
+(e)
+<pre>
+
+for (i = 1; i < n; i ++) {
+  for (j = 4n; j > 0; j--) {
+    printf("\n");
+  }
+}
+</pre></TD>
+
+<TD valign=top>
+(f)
+<pre>
+
+for (i = 0; i < n*n; i += n) {
+  for (j = i; j < i+n ; j++) {
+    printf("\n");
+  }
+}
+</pre></TD>
+
+
+</TR>
+</TABLE>
+
+<p>
+Circle <i>all</i> answers that apply.
+<p>
+<b>Question 8</b>: Which of the above print out <i>O(log(n))</i> lines?<br>
+<b>Question 9</b>: Which of the above print out <i>O(n)</i> lines?<br>
+<b>Question 10</b>: Which of the above print out <i>O(n*log(n))</i> lines?<br>
+<b>Question 11</b>: Which of the above print out <i>O(n*n)</i> lines?<br>
+<b>Question 12</b>: Which of the above print out <i>Theta(n)</i> lines?<br>
+<b>Question 13</b>: Which of the above print out <i>Omega(n*n)</i> lines?<br>
+

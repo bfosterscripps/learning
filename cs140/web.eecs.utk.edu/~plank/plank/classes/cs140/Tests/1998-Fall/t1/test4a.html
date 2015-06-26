@@ -1,0 +1,86 @@
+<title> CS140 -- Midterm Exam: Q12 - Q14 continued</title>
+
+<body bgcolor=FFDCCC>
+
+<h3> CS140 -- Midterm Exam: Q12 - Q14 (cont)</h3>
+<b>Question 12:</b>
+
+<font size=-1>
+Which of the following pieces of code should go into ``Code fragment 1''
+(specify <i>all</i> that are correct):
+</font>
+<p>
+<TABLE border=7>
+<TR><TD><i>a.</i></TD>
+    <TD><tt>p = &p2;</tt></TD></TR>
+<TR> <TD><i>b.</i></TD>
+  <TD><tt>p = (Person *) malloc(sizeof(Person));</tt></TD></TR>
+<TR><TD><i>c.</i></TD>
+    <TD><tt>&p2 = (Person *)malloc(sizeof(Person));<br>
+            p = &p2;</tt></TD></TR>
+<TR> <TD><i>d.</i></TD>
+  <TD><tt>p = parray</tt></TD></TR>
+<TR> <TD><i>e.</i></TD>
+  <TD><tt>p = &(parray[0])</tt></TD></TR>
+</TABLE>
+<p>
+
+<hr>
+<b>Question 13:</b>
+<font size=-1>
+Which of the following pieces of code should go into ``Code fragment 2''
+(specify <i>all</i> that are correct):
+</font>
+<p>
+<TABLE border=7>
+<TR><TD><i>a.</i></TD>
+    <TD><tt>&p.firstname = is->fields[0];<br>
+            &p.lastname = is->fields[1];</tt></TD></TR>
+<TR><TD><i>b.</i></TD>
+    <TD><tt>p->firstname = is->fields[0];<br>
+            p->lastname = is->fields[1];</tt></TD></TR>
+<TR><TD><i>c.</i></TD>
+    <TD><tt>p->firstname = strdup(is->fields[0]);<br>
+            p->lastname = strdup(is->fields[1]);</tt></TD></TR>
+<TR><TD><i>d.</i></TD>
+    <TD><tt>*p->firstname = strdup(is->fields[0]);<br>
+            *p->lastname = strdup(is->fields[1]);</tt></TD></TR>
+<TR><TD><i>e.</i></TD>
+    <TD><tt>*p.firstname = strdup(is->fields[0]);<br>
+            *p.lastname = strdup(is->fields[1]);</tt></TD></TR>
+<TR><TD><i>f.</i></TD>
+    <TD><tt>strcpy(p->firstname, is->fields[0]);<br>
+            strcpy(p->lastname, is->fields[1]);</tt></TD></TR>
+<TR><TD><i>g.</i></TD>
+    <TD><tt>strcpy(&(p->firstname), is->fields[0]);<br>
+            strcpy(&(p->lastname), is->fields[1]);</tt></TD></TR>
+</TABLE>
+
+<p>
+<hr>
+<b>Question 14:</b>
+<font size=-1>
+Which of the following pieces of code should go into ``Code fragment 3''
+(specify <i>all</i> that are correct):
+</font>
+<p>
+<TABLE border=7>
+<TR><TD><i>a.</i></TD>
+    <TD><tt>p->age = is->fields[2];<br></tt></TD></TR>
+<TR><TD><i>b.</i></TD>
+    <TD><tt>p->age = strdup(is->fields[2]);<br></tt></TD></TR>
+<TR><TD><i>c.</i></TD>
+    <TD><tt>p->age = atoi(is->fields[2]);</tt></TD></TR>
+<TR><TD><i>d.</i></TD>
+    <TD><tt>p->age = atoi(strdup(is->fields[2]));</tt></TD></TR>
+<TR><TD><i>e.</i></TD>
+    <TD><tt>sscanf(is->fields[2], "%d", &p.age);</tt></TD></TR>
+<TR><TD><i>f.</i></TD>
+    <TD><tt>sscanf(is->fields[2], "%d", p->age);</tt></TD></TR>
+<TR><TD><i>g.</i></TD>
+    <TD><tt>sscanf(is->fields[2], "%d", &p->age);</tt></TD></TR>
+<TR><TD><i>h.</i></TD>
+    <TD><tt>p->age = malloc(sizeof(int)); <br>
+            sscanf(is->fields[2], "%d", p->age);</tt></TD></TR>
+            </tt></TD></TR>
+</TABLE>

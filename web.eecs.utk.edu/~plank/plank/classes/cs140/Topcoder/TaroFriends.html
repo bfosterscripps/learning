@@ -1,0 +1,101 @@
+<title>Hints for SRM 613, D2, 500-pointer (TaroFriends)</title>
+<h3>Hints for SRM 613, D2, 500-pointer (TaroFriends)</h3>
+<h3>James S. Plank</h3>
+Mon Mar 31 12:31:24 EDT 2014
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=13005&rd=15846>Problem Statement</a>.
+<hr>
+
+This is an example of a topcoder problem that is really easy to
+program once you figure out what to program.  I'll be honest -- when
+I first did it, I thought of a DP solution that I knew would work, so
+I hacked it up and got 406 points.  After I submitted it, I realized
+that there was a much easier solution.
+<p>
+Here is the key realization.  First, let's sort <b>coordinates</b>.  
+Now, the cats are going to partitioned into two groups: Those that are
+jumping to the left, and those that are jumping to the right.
+A solution to this problem will be when all of the cats who are jumping the
+right will have lower indices than all of the cats who are jumping to the left.
+<p>
+Think about that.  Suppose cat <i>i</i> is jumping to the right.  And suppose
+that <i>j</i> is an index less than <i>i</i>.  The distance between the two
+cats is minimized when cat <i>j</i> also jumps to the right.  What this means is
+that if cat <i>i</i> is jumping to the right, then all cats with indices less than
+<i>i</i> have to be jumping to the right.
+<p>
+Similarly, suppose cat <i>i</i> is jumping to the left.  It should be clear that
+all cats with indices greater than <i>i</i> should also be jumping to the left.
+<p>
+Given those two facts, it must be the case that for an optimal solution, all cats
+with indices less than <i>i</i>, for some <i>i</i> are jumping to the right, and
+all cats with indices greater than or equal to <i>i</i> are jumping to the left.
+So, one way to solve this problem is to try all values of <i>i</i> from 0 to 
+<b>coordinates.size()</b>, and for each of these, simulate the cats jumping.  Return
+the minimum difference from the simulation.
+<p>
+As always, an example helps.  Let's look at example 0.  Here are the four potential 
+values of <i>i</i>:
+<UL>
+<LI> <i>i = 0</i>: LLL: 
+<p><center><table border=3><td><img src="TaroFriends-LLL.jpg"></td></table></center><p>
+<LI> <i>i = 1</i>: RLL: 
+<p><center><table border=3><td><img src="TaroFriends-RLL.jpg"></td></table></center><p>
+<LI> <i>i = 2</i>: RRL: 
+<p><center><table border=3><td><img src="TaroFriends-RRL.jpg"></td></table></center><p>
+<LI> <i>i = 3</i>: RRR: 
+<p><center><table border=3><td><img src="TaroFriends-RRR.jpg"></td></table></center><p>
+</UL>
+The best is three.  
+<p>
+Now, given a value of <i>i</i>, how can you determine the distance?  One way would
+be to create an array with the new coordinates and find its min and max value.
+Suppose you did that with sorting, and then looking at the first and last elements.  
+Then determining the distance would be <i>O(n log(n))</i> (where <i>n</i> is <b>coordinates.size()</b>).  Since there are <i>n+1</i>
+values of <i>i</i>, solving the problem in this way would be <i>O(n<sup>2</sup> log(n))</i>.
+<p>
+Instead, you can determine the min and max values by running through the new coordinates
+array and storing the max/min while you run through it.  That is <i>O(n)</i>, which would
+solve the problem in <i>O(n<sup>2</sup>)</i>.
+<p>
+You can do better.  Think about it -- the minimum value is going to either be
+the first value, or the value of the smallest cat that jumped left (if any cats jumped
+left).   The maximum value is either going to be the last value, or the value of
+the greatest cat that jumped right (if any cats jumped right).  Those are the only 
+values that you need to look at.
+<p>
+Let's look at example 0 to be sure we understand.  The original <b>coordinates</b>
+vector is { -3, 0, 1 }.  When we sort it, it doesn't change.  
+<UL>
+<LI> Suppose <i>i=0</i>,
+and the cat jumping is LLL.  Then the minimum value is going to be the value of cat
+0 (-6), or the value of the smallest cat that jumped left (which happens to be cat 0): -6.
+The maximum value is going to be the value of cat 2 (-2), or the value of the largest
+cat that jumped right.  There is no such cat, so the minimum is -6 and the maximum is -2, making the difference 4.
+<p>
+<LI> Suppose <i>i=1</i>, and the cat jumping is RLL.
+Then the minimum value is going to be the value of cat
+0 (0), or the value of the smallest cat that jumped left (cat 1: -3).  Thus the 
+minimum is -3.  The maximum value is going to be the value of cat 2 (-2), or the value of the largest
+cat that jumped right (cat 0: 0).  Thus, the maximum is 0 and the difference is 3.
+
+<p>
+<LI> Suppose <i>i=2</i>, and the cat jumping is RRL.
+Then the minimum value is going to be the value of cat
+0 (0), or the value of the smallest cat that jumped left (cat 2: -2).  Thus the 
+minimum is -2.  The maximum value is going to be the value of cat 2 (-2), or the value of the largest
+cat that jumped right (cat 1: 3).  Thus, the maximum is 3 and the difference is 5.
+
+<p>
+<LI> Finally, suppose <i>i=3</i>, and the cat jumping is RRR.
+Then the minimum value is going to be the value of cat
+0 (0), or the value of the smallest cat that jumped left (no such cat).  Thus the 
+minimum is 0.  The maximum value is going to be the value of cat 2 (4), or the value of the largest
+cat that jumped right (cat 2: 4).  Thus, the maximum is 4 and the difference is 0.
+</UL>
+
+This determination is <i>O(1)</i>, which means that you solve the problem in linear time.
+That's much better than the others.
+<p>
+Now, for the purposes of Topcoder, <i>n</i> has a maximum value of 50, so any algorithm
+will work in practice.  However, this is a good exercise for you to figure out the
+best algorithm and program it up.

@@ -1,0 +1,305 @@
+<center>
+<h3>Spring 2014 CS140 Final Exam - Answers and Grading</h3>
+<h3>James S. Plank</h3>
+</center>
+
+<hr>
+<h3>Question 1 - Big O - 10 Points</h3>
+
+This question asked you to memorize the definition of Big-O, and apply
+it to two concrete functions.  If you're studying from this exam, what do
+you study for this?  You make sure you've memorized the definition of Big-O,
+and then you know how to match <i>T(n)</i> and <i>f(n)</i> to a Big-O equation.
+<p>
+Let's recall the definition of Big-O from the lecture notes:
+
+<p>
+<center>
+<i>T(n) = O(f(n))</i> if there exists a constant <i>c</i> such that
+<i>c*f(n) >= T(n)</i>.
+</center>
+<p>
+
+Here, <i>f(n) = n<sup>3</sup></i> and <i>T(n) = 5n<sup>3</sup> + 500 log<sub>2</sub> (n).</i>
+<p>
+And recall how we define "greater than or equal" with functions:
+<p>
+<i>f(n)</i> <b><i>is greater than or equal to</i></b> <i>g(n)</i>
+if there is a value <i>x<sub>0</sub></i> so that for all <i>x >= x<sub>0</sub></i>:
+<p><center>
+<i> f(x) >= g(x)</i>
+</center><p>
+<p>
+Put them together, and you get <i>I</i>: For all <i>n &ge; x<sub>0</sub>, cn<sup>3</sup>
+&ge; 5n<sup>3</sup> + 500 log<sub>2</sub> (n).</i>
+
+<p>
+Now, given that, I'd say choose the largest <i>c</i> and <i>x<sub>0</i>, and you're safe.
+That's answer J: <i>c = 10</i>, <i>x<sub>0</sub> = 1024</i>.
+<p>
+We can prove it though -- for these two constants, you have:
+<center>
+10 (1024)<sup>3</sup> = 10 (2<sup>10</sup>)<sup>3</sup> = 10 (2<sup>30</sup>).
+<p>
+<i>5 (1024)<sup>3</sup> + log<sub>2</sub>(1024) = 5 (2<sup>30</sup>) + 5,000.</i>
+</center>
+It's pretty clear that the top number is bigger than the bottom, and the function will
+be growing faster.
+<p>
+As it turns out, none of the other sets of constants work:  
+<UL>
+<LI> With A, <i>cn<sup>3</sup></i> is zero.
+<LI> In B through D, <i>5n<sup>3</sup></i> is always going to grow faster than
+<i>n<sup>3</sup></i>, so that won't work.
+<LI> In E through G, the two <i>5n<sup>3</sup></i> terms are equal, so 
+<i>cn<sup>3</sup></i> will never be greater than 
+<i> 5n<sup>3</sup> + 500 log<sub>2</sub> (n).</i>
+<LI> In H and I, when <i>n = 2</i>, 
+<i> 5n<sup>3</sup> + 500 log<sub>2</sub> (n)</i> equals 40+500 = 540, and 
+<i> 10n<sup>3</sup></i> equals 80.  Thus, <i>x<sub>0</sub></i> is not big enough yet.
+</UL>
+
+<h3>Grading</h3>
+
+Five points for <b>Part A</b> and <b>Part B</b>.
+I was very liberal with partial credit:
+<UL>
+<LI> <b>Part A</b>, you got 2.5 points for "close" answers: A, M, J, K.
+<LI> <b>Part A</b>, you got 1 points for "less close" answers: B, C, E, L, N, O.
+<LI> <b>Part b</b>, you got 3.5 points for H, and 2.5 for I, G and D.
+</UL>
+
+<p><center><table border=3><td><a href="q.1.jpg"><img src="q.1.jpg" width=400></a></td></table></center><p>
+<hr>
+<h3>Question 2 - Linked Lists - 16 points</h3>
+
+The point of this question was to test your understanding of how linked lists are
+implemented.  There are detailed lecture notes for this, plus you implemented this
+exact data structure in lab 8, so my hope was that you would be prepared.  How do
+you study for this?  By reading through the lecture notes and making sure you 
+understand them.
+<p>
+<b>Part A:</b> 
+At the point of the first <b>cout</b> call, here is the state of the linked list:
+
+<p><center><table border=3><td><a href="Q2-A.jpg"><img src="Q2-A.jpg" width=500></a></td></table></center><p>
+
+So:
+<UL>
+<LI> The first line is "B".
+<LI> The second line is "C".
+<LI> The third line is "D".
+</UL>
+
+The next two statements put the string "X" into the sentinel, and then corrupt <b>p->flink</b>
+so that it points to <b>x->flink = p</b>:
+
+<p><center><table border=3><td><a href="Q2-B.jpg"><img src="Q2-B.jpg" width=500></a></td></table></center><p>
+
+So:
+<UL>
+<LI> <b>p->flink</b> equals <b>p</b>, so the fourth line is "A".
+<LI> <b>y->blink</b> also equals <b>p</b>, so the fifth line is "A".
+<LI> <b>y->blink->blink</b> is the sentinel, so the fifth line is "X".
+</UL>
+
+<b>Part B:</b> At the end of <b>main()</b>, the destructor is called on <b>b</b>.
+That's where the seg fault occurs.  Specifially, the destructor tries to call <b>delete</b>
+on every node in the list, but when it gets to <b>p</b>, it follows <b>p->flink</b> and
+ends up deleting <b>p</b> twice.  On a good day, that's a seg fault.
+<p>
+Some of you said stuff like "you can't access the sentinel because it's protected."
+That's a true statement in that my code cannot say "b.sentinel."  However, if my code
+is passed a pointer to the sentinel (like p->blink), 
+then my code is free to use it.
+
+<h3>Grading</h3>
+<UL>
+<LI> <b>Line 1</b>: 2 points for B, 0.5 for A or C.
+<LI> <b>Line 2</b>: 2 points for C, 0.5 for B or D.
+<LI> <b>Line 3</b>: 2 points for D, 0.5 for C or empty string.
+<LI> <b>Line 4</b>: 2 points for A, 0.5 for X.
+<LI> <b>Line 5</b>: 2 points for A, 0.5 for X.
+<LI> <b>Line 6</b>: 2 points for X, 0.5 for A or D.
+<LI> 2 points for saying that the seg fault happens in the destructor.
+<LI> 2 points for saying that it's because <b>p->flink</b> is pointing to itself.
+</UL>
+
+<p><center><table border=3><td><a href="q.2.jpg"><img src="q.2.jpg" width=400></a></td></table></center><p>
+
+<hr>
+<h3>Question 3 - AVL Trees - 15 points</h3>
+
+I solved these by putting the heights in the triangles, and then calculating the
+heights of the higher nodes.  When I spotted an imbalance, I figured out whether
+the imbalance was a zig-zig or a zig-zag, and then did the right rotations:
+
+<p><center><table border=3><td><a href="Q3-2.jpg"><img src="Q3-2.jpg" width=400></a></td></table></center><p>
+<p><center><table border=3><td><a href="Q3-3.jpg"><img src="Q3-3.jpg" width=400></a></td></table></center><p>
+<p><center><table border=3><td><a href="Q3-4.jpg"><img src="Q3-4.jpg" width=400></a></td></table></center><p>
+<p><center><table border=3><td><a href="Q3-5.jpg"><img src="Q3-5.jpg" width=400></a></td></table></center><p>
+<p><center><table border=3><td><a href="Q3-6.jpg"><img src="Q3-6.jpg" width=400></a></td></table></center><p>
+
+So:
+<UL>
+<LI> Scenario 2 is d (Single rotate about D).
+<LI> Scenario 3 is k (Double rotate about J).
+<LI> Scenario 4 is f (Single rotate about F).
+<LI> Scenario 5 is b (Single rotate about B).
+<LI> Scenario 6 is g (Double rotate about F).
+</UL>
+
+<h3>Grading</h3>
+3 points per scenario.
+Once again, I was liberal with extra credit:
+
+<UL>
+<LI> Scenario 2: One point for b, c, f, g, e.
+<LI> Scenario 3: One point for j, l, n, o.
+<LI> Scenario 4: One point for g, d.
+<LI> Scenario 5: One point for c, d, f, g.
+<LI> Scenario 6: One point for f, d.
+</UL>
+
+<p><center><table border=3><td><a href="q.3.jpg"><img src="q.3.jpg" width=400></a></td></table></center><p>
+
+<hr>
+<h3>Question 4 - Code Analysis - 16 points</h3>
+
+The key here is to figure out the big-O complexity of the procedure, and then scale
+the time accordingly.  The study material for this was the Big-O lecture notes,
+the recursion lecture notes, 
+plus the myriad times in class that we explored how the running time of programs
+scaled when we doubled the size of input, or increased it by a factor of ten.
+<p>
+One sanity check for yourselves: if I'm doubling <i>n</i>, and there's
+a loop that goes from 0 to <i>n-1</i>, then unless there's something really 
+crazy, the running time of the program is going to increase by at least a 
+factor of two.  There was nothing crazy here, so the answers of 10 and 11 seconds
+couldn't apply to any of the programs.   
+
+<UL>
+<LI> <b>Implementation 1</b>:
+This is going to be linear in <i>n</i>, so doubling <i>n</i> doubles the time: 20 seconds.
+<p>
+<LI> <b>Implementation 2</b>:
+Since <b>v</b> is a set, the <b>insert</b> call throws out duplicates.  For that reason, the
+set never gets bigger than 10 elements.  Each insertion is <i>O(1)</i>, and the procedure
+will be linear: 20 seconds.
+<p>
+<LI> <b>Implementation 3</b>:
+Now we're using a multiset, which keeps duplicates. This means that the multiset grows to
+be <i>n</i> elements, which means that Q4 is <i>O(n log n)</i>.  Now, 22 seconds is a good
+guess for that, but you can make it precise:
+<p>
+<center>
+If <i>n log(n) = 10</i>, then <i>2n log(2n) = 2n (log(n) + 1) = 2(n log(n)) + 2 = 22.</i>
+</center><p>
+
+<p>
+<LI> <b>Implementation 4</b>:
+Straightforward linear: 20 seconds.
+<p>
+<LI> <b>Implementation 5</b>:
+As we've seen many times in class, this is <i>O(n<sup>2</sup>)</i>, so doubling the size of input
+will increase the running time by 4: 40 seconds.
+<p>
+<LI> <b>Implementation 6</b>:
+This one is <i>O(n<sup>2</sup>) + O(n log n)</i>.  The quadratic term dominates, so this one is
+really <i>O(n<sup>2</sup>)</i>, and the answer is again 40 seconds.  You may be tempted to 
+throw in four seconds for the <i>O(n log n)</i> term, but that is technically incorrect
+(you can work out the math).
+<p>
+<LI> <b>Implementation 7</b>: Linear recursion: 20 seconds.
+<p>
+<LI> <b>Implementation 8</b>: Exponential recursion -- when you add one to <i>n</i>, it 
+doubles the running time.  How to figure this out?  Try it on four example values of
+<i>n</i>: 1, 2, 3 and 4.  <i>Q4(n)</i> is going to be called 3, 7, 15 and 31 times in these
+four cases.  Clearly it doubles when you add 1 to <i>n</i>, so doubling <i>n</i> is going
+to make the running time skyrocket.  The answer is "over 60 seconds."
+</UL>
+
+<h3>Grading</h3>
+
+<UL>
+<LI> <b>Implementation 1</b> 2 points for 20, 1.5 for 22.
+<LI> <b>Implementation 2</b> 2 points for 20, 1.5 for 22.
+<LI> <b>Implementation 3</b> 2 points for 22, 1.5 for 20, 0.5 for 40.
+<LI> <b>Implementation 4</b> 2 points for 20, 1.5 for 22.
+<LI> <b>Implementation 5</b> 2 points for 40, 1.5 for 44, 0.5 for 22.
+<LI> <b>Implementation 6</b> 2 points for 40 or 44.
+<LI> <b>Implementation 7</b> 2 points for 20, 1.5 for 22.
+<LI> <b>Implementation 8</b> 2 points for > 60.
+</UL>
+
+<p><center><table border=3><td><a href="q.4.jpg"><img src="q.4.jpg" width=400></a></td></table></center><p>
+
+<hr>
+<h3>Question 5 - Sets and Maps - 15 points</h3>
+
+I'll let you inhabit my perspective, and read a hand-written answer (mine - click on it to 
+blow it up):
+
+<p><center><table border=3><td><a href="Q5.jpg"><img src="Q5.jpg" width=500></a></td></table></center><p>
+
+This is the proper way to solve this problem -- use a map, whose key is the last name, and
+whose val is a set of first names.  It can be a pointer to a set (in fact, that's better, I
+think, than my answer above).  When you're done creating the map, then you traverse it and
+maintain the last-name with the greatest set size.  If you encounter a last-name whose
+set size is equal to the greatest, ignore it, because the last name is lexicographically 
+greater than the current "best" one.  When you're done, print out all the first names
+that correspond to the last name.
+
+<p>
+There were some common solutions that y'all gave that were not the way to solve
+the problem.  I've grouped them into three categories:
+<p>
+<b> STRING/INT MAPS</b>: Quite a few of you tried a structure like the following:
+<UL>
+<LI> Maintain a map of last names (keys) and counts of first names (val).  
+<LI> Maintain a set of first names, which are unique.
+<LI> Maybe reset this set whenever you have discovered a new last name with maximal count.
+<LI> When you're done, print out the names in the set.
+</UL>
+
+This approach does not work, because you have to keep the association of certain first names
+with certain last names.  Consider the following example:
+<p><center>
+{ "John Smith", "John Doe", "Binky Taylor", "Kathy Doe" }
+</center><p>
+The approach above will do the following:
+<UL>
+<LI> "John Smith": Map = { [Smith,1] }, Set = { John }
+<LI> "John Doe": Map = { [Doe,1],[Smith,1] }, Set = { John }
+<LI> "Binky Taylor": Map = { [Doe,1],[Smith,1][Taylor,1] }, Set = { Binky,John }
+<LI> "Kathy Doe": Map = { [Doe,2],[Smith,1][Taylor,1] }, Set = ?
+</UL>
+At this point, I don't know what you're going to do with the set to make it right.
+The problem is that you've lost the association of first and last names.
+<p>
+<b> STRING/STRING MAPS</b>: Quite a few of you tried a map whose keys are last names and 
+whose vals are first names.  That won't work, because it only holds one first name per last
+name.  Some of you added a map keyed on first name with vals as last names.  That won't work
+for the same reason.
+
+<p>
+<b>MULTIMAPS</b>: Some of you tried to insert last-name/first-name pairs into multimaps,
+and then to cull duplicates while traversing the multimaps.  That approach can work, but
+you need to be super-careful traversing the multimap.  I was not leanient on grading this
+approach, because the extra care required to make it work is the 
+reason why it is a poor approach.
+
+<h3>Grading</h3>
+
+<UL>
+<LI> Five points for the first part.  
+<LI> Eight points for code structure.  The STRING/INT MAPS and STRING/STRING MAPS
+approaches got 3 points max, and often less because the code would become really 
+convoluted.  I took off for MULTIMAPS depending on how convoluted (and incorrect) the
+subsequent code was.
+<LI> Two points for reading input correctly.
+<LI> Two points for printing output correctly.
+<LI> Three points for the mechanics of sets and maps.
+</UL>
+
+<p><center><table border=3><td><a href="q.5.jpg"><img src="q.5.jpg" width=400></a></td></table></center><p>

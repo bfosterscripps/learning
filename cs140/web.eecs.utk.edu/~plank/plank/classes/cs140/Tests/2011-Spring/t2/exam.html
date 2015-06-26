@@ -1,0 +1,283 @@
+<center>
+<h3>CS140 Final Exam - May 6, 2011 - James S. Plank</h3>
+Answer all questions on the answer sheet
+</center>
+<hr>
+<font size=-1>
+<table><td valign=top>
+<font size=-1>
+<h3>Question 1</h3>
+
+On the right, I have listed the class specification
+for a a doubly linked list node, and the <b>protected</b>
+data and <b>public</b> method <b>Erase()</b> from the 
+<b>Dlist</b> class.  As you recall, this implements
+circular, doubly linked lists with a sentinel node.
+<p>
+Your job in this question is to implement the <b>Erase()</b>
+method.  Please do so on the answer sheet.
+</td><td valign=top>
+<center><table border=3 cellpadding=3><td><pre><font size=-1>
+class Dnode {
+  public:
+    string s;
+    Dnode *flink;
+    Dnode *blink;
+};
+
+class Dlist {
+  public:
+    ...
+    void Erase(Dnode *n);
+    ...
+  protected:
+    Dnode *sentinel;
+    int size;
+};
+</pre></td></table></td></table>
+
+<hr>
+
+<table>
+<td valign=top width=100><font size=-1><h3>Question 2</h3></td>
+<td valign=top><table border=3 cellpadding=3>
+<tr>
+<td><font size=-1><b>Index</b></font></td>
+<td width=40><font size=-1><i>0</i></font></td>
+<td width=40><font size=-1><i>1</i></font></td>
+<td width=40><font size=-1><i>2</i></font></td>
+<td width=40><font size=-1><i>3</i></font></td>
+<td width=40><font size=-1><i>4</i></font></td>
+<td width=40><font size=-1><i>5</i></font></td>
+<td width=40><font size=-1><i>6</i></font></td>
+<td width=40><font size=-1><i>7</i></font></td>
+<td width=40><font size=-1><i>8</i></font></td>
+<td width=40><font size=-1><i>9</i></font></td></tr>
+<tr>
+<td><font size=-1><b>Value</b></font></td>
+<td><font size=-1></font></td>
+<td><font size=-1></font></td>
+<td><font size=-1>"A"</font></td>
+<td><font size=-1></font></td>
+<td><font size=-1>"man"</font></td>
+<td><font size=-1></font></td>
+<td><font size=-1>"of"</font></td>
+<td><font size=-1></font></td>
+<td><font size=-1>"odd"</font></td>
+<td><font size=-1>"circumstance"</font></td></tr>
+</table></td></table>
+<p>
+Suppose we are hashing and have the hash table pictured above.
+We have two hash functions, <b>h1()</b> and <b>h2()</b>, such 
+that <b>h1("Solid")</b> = 32159678,
+and <b>h2("Solid")</b> = 75079104.
+<p>
+For each hash function and collision resolution strategy, state the location 
+in the table where <b>"Solid"</b> will be inserted, and the number of probes
+that it takes to find that location.
+
+<p>
+<UL>
+<LI> <b>A:</b> Linear probing with hash function <b>h1()</b>.
+<LI> <b>B:</b> Linear probing with hash function <b>h2()</b>.
+<LI> <b>C:</b> Quadratic probing with hash function <b>h1()</b>.
+<LI> <b>D:</b> Quadratic probing with hash function <b>h2()</b>.
+<LI> <b>E:</b> Double hashing with primary hash function <b>h1()</b> and
+     secondary hash function <b>h2()</b>.
+<LI> <b>F:</b> Double hashing with primary hash function <b>h2()</b> and
+     secondary hash function <b>h1()</b>.
+</UL>
+
+<hr>
+<table><td valign=top><font size=-1>
+<h3>Question 3</h3>
+
+Take a look at the program to the right:
+<p>
+
+
+<b>Part A:</b> What will the output of this program be if standard input is:
+
+<p><center><table border=3 cellpadding=3><td><font size=-1><pre>
+A
+B
+C
+D
+E
+F
+G
+</pre></td></table></center><p>
+
+<b>Part B:</b> If you simply replaced the word <b>vector</b> with the 
+word <b>deque</b> in the program, it would produce the same output on the
+same input.
+Explain why this would be better or worse.  Describe an input file which 
+could be fed into the two programs (vector and deque) that would show markedly
+different behavior.  Explain what this behavior is and why.
+</td>
+<td valign=top>
+<center><table border=3 cellpadding=3><td><font size=-1><pre>
+#include &lt;vector&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+main()
+{
+  vector &lt;string&gt; lh;
+  string s;
+  int i;
+
+  i = 0;
+  while (getline(cin, s)) {
+    lh.push_back(s);
+    i++;
+    if (i%2 == 0) lh.erase(lh.begin());
+  }
+
+  for (i = 0; i &lt; lh.size(); i++) {
+    cout &lt;&lt; lh[i] &lt;&lt; endl;
+  }
+}
+</pre></td></table></center><p>
+</td></table>
+
+
+<hr>
+<h3>Question 4</h3>
+
+Demonstrate to me that:
+
+<p><center><table border=3><td><i>7x + 45 = O(x)</i></td></table></center><p>
+
+In other words, give me the precise definition  of big-O, and then use
+that defintion to show that the above statement is true.
+
+<hr>
+<h3>Question 5</h3>
+
+<b>Part A:</b>
+Suppose we are inserting integers into a regular binary search tree.  In other
+words, this is <i>not an AVL tree</i>.  Draw the tree that results when you 
+insert the following six integers in the given order into an empty tree:
+<p> <center>
+6991, 7377, 7127, 3676, 9660, 8832.
+<p> </center>
+<p>
+<b>Part B:</b>
+
+Behold the following binary search tree. 
+
+<p><center><table border=3><td><img src="BSTree.jpg" width=250></td></table></center><p>
+
+If the activity in a node is printing its string, tell me the results of performing
+a preorder traversal of this tree and a postorder traversal.
+<p>
+<b>Part C:</b>
+Draw the tree that results when the node "it's" is deleted.  Again, this is <i>not</i>
+an AVL tree.  It's a regular binary search tree.
+
+<hr>
+<h3>Question 6</h3>
+
+Behold the following AVL tree:
+
+<p><center><table border=3><td><img src="AVL-Tree-1.jpg" width=280></td></table></center><p>
+
+<UL>
+<LI> <b>Part A</b>: Prove to me that this is an AVL tree.
+In other words, give me the defintion of an AVL tree, and annotate
+each node of the tree with information that allows you to prove that
+it is an AVL tree.  To help you, I've redrawn the tree on the answer
+sheet.
+<p>
+<LI> <b>Part B</b>: Draw the AVL tree that results when you insert
+the string "what" into the tree.
+</UL>
+
+<hr>
+<pre>
+
+
+
+
+
+</pre>
+<h3>Question 7</h3>
+
+<b>Solve this Topcoder problem</b>: 
+Rabbits often feel lonely, so one group of rabbits decided to get
+together and hold a beauty contest to determine who among them has
+the most beautiful ears.  The rules are as follows.  Each rabbit
+submits one vote.  If a rabbit votes for himself/herself, that vote
+is considered invalid and thrown away.  In the end, the rabbit who
+receives the most valid votes is the winner.
+<p>
+You are given a vector &lt;string&gt; names and a vector
+&lt;string&gt; votes.  The i-th rabbit is named names[i], and he/she
+voted for the rabbit named votes[i].  All rabbits have distinct
+names.  Return the name of the rabbit who received the most valid
+votes.  If there is a tie for most votes, return an empty string
+instead.
+<p>
+<p>
+<p>
+<pre>
+DEFINITION
+Class:RabbitVoting
+Method:getWinner
+Parameters:vector &lt;string&gt;, vector &lt;string&gt;
+Returns:string
+Method signature:string getWinner(vector &lt;string&gt; names, vector &lt;string&gt; votes)
+
+NOTES
+-Rabbit names are case-sensitive. See example 4 for clarification.
+
+CONSTRAINTS
+-names will contain between 2 and 100000 elements, inclusive. 
+-Each element of names will contain between 1 and 50 characters, inclusive. 
+-Each character in names will be a letter ('A'-'Z', 'a'-'z').
+-All elements of names will be distinct. 
+-votes will contain the same number of elements as names. 
+-Each element of votes will be the same as one of the elements of names. 
+
+EXAMPLES
+
+0)
+{ "Alice", "Bill", "Carol", "Dick" }
+{ "Bill", "Dick", "Alice", "Alice" }
+
+Returns: "Alice"
+
+2 votes for Alice, 1 for Bill, 0 for Carol, and 1 for Dick. Alice got the most. 
+
+1)
+{ "Alice", "Bill", "Carol", "Dick" }
+{ "Carol", "Carol", "Bill", "Bill" }
+
+Returns: ""
+
+Bill and Carol are tied with 2 votes each.
+
+2)
+{ "Alice", "Bill", "Carol", "Dick" }
+{ "Alice", "Alice", "Bill", "Bill" }
+
+Returns: "Bill"
+
+Alice's vote for herself is invalid. 1 valid vote for Alice, 2 for Bill.
+
+3)
+{ "Alice", "Bill" }
+{ "Alice", "Bill" }
+
+Returns: ""
+
+All votes are invalid. 
+
+4)
+{ "WhiteRabbit", "whiterabbit", "whiteRabbit", "Whiterabbit" }
+{ "whiteRabbit", "whiteRabbit", "whiteRabbit", "WhiteRabbit" }
+
+Returns: "whiteRabbit"
+
+These four are different names. 

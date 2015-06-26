@@ -1,0 +1,12 @@
+<title>Hints for SRM 587, D2, 250-pointer (InsertZ)</title>
+<h3>Hints for SRM 587, D2, 250-pointer (InsertZ)</h3>
+<h3>James S. Plank</h3>
+Thu Sep 26 14:05:55 EDT 2013
+<br><a href=http://community.topcoder.com/stat?c=problem_statement&pm=12700&rd=15699>Problem Statement</a>.
+<hr>
+
+The simplest way to do this is to remove the z's from <i>goal</i> and seeing if the
+result equals <i>init.</i>  How best to remove the z's from <i>goal</i>?  Create 
+a new string <i>s</i> by traversing <i>goal</i>, and calling <b>push_back()</b> on 
+each non-z character in <i>goal</i>.  My solution was three lines of code.
+

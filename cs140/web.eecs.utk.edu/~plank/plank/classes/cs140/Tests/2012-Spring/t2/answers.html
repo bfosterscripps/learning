@@ -1,0 +1,189 @@
+<center>
+
+<h3>CS140 Final Exam - Spring, 2012 - James S. Plank</h3>
+<h3>Answers and Grading</h3>
+</center>
+<hr>
+<h3>Question 1</h3>
+
+This is straight from the lecture notes.  My code differs a little, but it's functionally
+equivalent:
+
+<p><center><table border=3 cellpadding=3><td><pre>
+int Sudoku::Recursive_Solve(int r, int c)
+{
+  int i, nr, nc;
+
+  if (r == 9) return 1;
+
+  nc = c+1;
+  nr = r;
+  if (nc == 9) { nc = 0; nr++; }
+  if (Grid[r][c] != ' ') return Recursive_Solve(nr, nc);
+    
+  for (i = '1'; i &lt;= '9'; i++) {
+    Grid[r][c] = i;
+    if (Is_Row_Valid(r) && Is_Col_Valid(c) && 
+        Is_Panel_Valid(r, c) && Recursive_Solve(nr, nc)) return 1;
+  }
+  Grid[r][c] = ' ';
+  return 0;
+}
+</pre></td></table></center><p>
+<h3>Grading</h3>
+10 points.  Basically, if you had the right code, you started with 10 points and were
+deducted for errors.  If you didn't have the right code, I assigned you the number of 
+points that I thought reflected how well you communicated to me that you understood
+some of the principles.  
+<p><center><table border=3><td><img src="q.1.jpg" width=500></td></table></center><p>
+<hr>
+<h3>Question 2</h3>
+
+<UL>
+<LI> <b>Statement A</b>: You can delete any node in a binary search tree: <b>False</b>
+<LI> <b>Statement B</b>: Destructors are called on local variables when their procedures
+return: <b>False</b>
+<LI> <b>Statement C</b>: The only time you copy megabytes with an assignment statement is
+when the two variables are objects, not pointers to objects.  Pointers just copy pointers: <b>True</b>
+<LI> <b>Statement D</b>: See the lecture notes -- statement <b>H</b> is the correct one: <b>False</b>
+<LI> <b>Statement E</b>: Exactly: <b>True</b>
+<LI> <b>Statement F</b>: See the lecture notes on big-O: <b>True</b>
+<LI> <b>Statement G</b>: That's the whole point of B-Trees: Nodes are stored in disk blocks,
+           and disk reads are expensive.  Searching for keys is fast: <b>True</b>
+<LI> <b>Statement H</b>: See <b>Statement D</b>: <b>True</b>
+<LI> <b>Statement I</b>: One child has to have height <i>h-1</i>.  The other may have height
+<i>h-1</i> or <i>h-2</i>: <b>False</b>
+<LI> <b>Statement J</b>: Nope, it's an inorder traversal: <b>False</b>
+<LI> <b>Statement K</b>: All leaf nodes are the same distance from the root, so this one is: <b>True</b>
+<LI> <b>Statement L</b>: Gotta think about this -- <b>log<sub>2</sub></b><i>(f(n))</i> is less than <b>f(n)</b>.  Therefore, (<i>f(n) + <b>log<sub>2</sub></b>(f(n)))</i> is less than <i>2f(n)</i>.  So,
+by <b>Statement F</b>, this is: <b>True</b>
+<LI> <b>Statement M</b>: Definition of B-Trees: <b>False</b>
+<LI> <b>Statement N</b>: They are both <i>O(log<sub>2</sub>(n))</i>: <b>False</b>
+<LI> <b>Statement O</b>: If it's not balanced, this is: <b>True</b>
+</UL>
+<h3>Grading</h3>
+
+One point per question.
+
+<p><center><table border=3><td><img src="q.2.jpg" width=500></td></table></center><p>
+<p><center><table border=3><td><img src="Q2-Detail.jpg" width=600></td></table></center><p>
+<hr>
+<h3>Question 3</h3>
+
+<b>Part A</b>: No rebalancing required:
+
+<p><center><table border=3><td><img src="First-AVL-A.jpg" width=200></td></table></center><p>
+
+<b>Part B</b>: On this one, you need to rebalance:
+
+<p><center><table border=3><td><img src="First-AVL-B.jpg" width=500></td></table></center><p>
+
+<b>Part C</b>: On this one, you need to rebalance too, but it's more subtle, as the 
+imbalance is higher up the tree:
+
+<p><center><table border=3><td><img src="First-AVL-C.jpg" width=500></td></table></center><p>
+<h3>Grading</h3>
+
+Two points for part <b>A</b>, and three for each of the other trees.
+
+<p><center><table border=3><td><img src="q.3.jpg" width=500></td></table></center><p>
+<hr>
+<h3>Question 4</h3>
+
+<b>Part A:</b> There are imbalances at nodes <b>I</b> and <b>K</b>.
+<p>
+<b>Part B:</b> There are two legal answers.  Either 
+you recursively delete <b>I</b> and replace <b>J</b> with <b>I</b>, or 
+you recursively delete <b>K</b> and replace <b>J</b> with <b>K</b>:
+
+<p><center><table border=3><td><img src="BS-Tree-A.jpg" width=200></td>
+<td><img src="BS-Tree-B.jpg" width=200></td></table></center><p>
+<h3>Grading</h3>
+Three points for <b>Part A</b>.  To receive full credit, you had to specify a
+node that was imbalanced.  Also, three points for <b>Part B</b>.
+<p><center><table border=3><td><img src="q.4.jpg" width=500></td></table></center><p>
+<hr>
+<h3>Question 5</h3>
+
+<b>Part A:</b> When you delete <b>F</b>, node <b>G</b> is imbalanced, and 
+the rebalancing required is a Zig-Zag: <b>Double Rotate About H</b>.  The
+resulting tree will be balanced.
+<p>
+<b>Part B:</b> When you delete <b>B</b>, you replace it with <b>A</b>.
+Node <b>E</b> is imbalanced, and 
+the rebalancing required is a Zig-Zig: <b>Rotate About G</b>.  The
+resulting tree will be balanced.
+<p>
+<b>Part C:</b> When you delete <b>L</b>, node <b>M</b> is imbalanced, and you 
+must perform a double rotation about <b>N</b>.  When that's done, node <b>K</b>
+is imbalanced, and that too is a Zig-Zag, requiring a double rotation about <b>G</b>.
+Thus, the answer is:
+<UL>
+<LI> Rotate about <b>N</b>.
+<LI> Rotate about <b>N</b>.
+<LI> Rotate about <b>G</b>.
+<LI> Rotate about <b>G</b>.
+</UL>
+
+<h3>Grading</h3>
+<UL>
+<LI> 2 points for <b>Part A</b>.
+<LI> 2 points for <b>Part B</b>.
+<LI> 4 points for <b>Part C</b>.
+</UL>
+You lost a point per part if you drew me trees rather than specifying 
+rotations, and you had to give me the correct tree.
+<p><center><table border=3><td><img src="q.5.jpg" width=500></td></table></center><p>
+<hr>
+<h3>Question 6</h3>
+
+You read each team into a vector of names.  Then you sort the vector and construct a
+string from the vector, which contains each name in sorted order separated by a 
+space (or a colon, or any other non-lowerspace letter).  That string becomes a key
+that you insert into a set.  Since you don't insert duplicate keys into a set, whenever
+you try to insert the same team into the set twice, the second insertion fails.  
+Thus, the size of the set is the number of unique teams:
+
+<p><center><table border=3 cellpadding=3><td><pre>
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;set&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+main()
+{
+  set &lt;string&gt; teams;
+  vector &lt;string&gt; team;
+  string key, n;
+  int i;
+
+  while (1) {
+    team.clear();
+    for (i = 0; i &lt; 7; i++) {
+      if (cin &gt;&gt; n) {
+        team.push_back(n);
+      } else {
+        cout &lt;&lt; teams.size() &lt;&lt; endl;
+        exit(0);
+      }
+    }
+    sort(team.begin(), team.end());
+    key = "";
+    for (i = 0; i &lt; 7; i++) {
+      key += team[i];
+      key += " ";
+    }
+    teams.insert(key);
+  }
+}
+</pre></td></table></center><p>
+
+Obviously, you only need one string, but two make it clearer.
+<h3>Grading</h3>
+This one was 15 points.  As with question 1, you either started with 15 and
+were deducted, or your answer was off-base, and I assigned partial credit according
+to how well you communicated to me that you could do various parts of this.
+<p>
+If you gave me an <i>n<sup>2</sup></i> solution, you received half credit.  
+<p><center><table border=3><td><img src="q.6.jpg" width=500></td></table></center><p>

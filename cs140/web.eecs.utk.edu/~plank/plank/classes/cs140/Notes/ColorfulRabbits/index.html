@@ -1,0 +1,62 @@
+<h3>Topcoder 250-Point problem from SRM 499, Division 1 (ColorfulRabbits)</h3>
+<UL>
+<LI> James S. Plank
+<LI> Mon Apr  1 13:37:26 EDT 2013
+<LI> Problem description: <a href=http://community.topcoder.com/stat?c=problem_statement&pm=11327&rd=14428>http://community.topcoder.com/stat?c=problem_statement&pm=11327&rd=14428</a>
+<LI> Skeleton implementation: <a href="Skeleton.cpp">Skeleton.cpp</a>
+<LI> Main with examples: <a href="Main.cpp">Main.cpp</a>
+</UL>
+
+Go ahead and think about the problem, and if you think you can solve it, go ahead.  
+Otherwise, here is some help.  If a rabbit answers <i>x</i>, then there are <i>x+1</i> rabbits 
+that have the same color, including the rabbit who answered.  
+<p>
+So, the first step (at least for me) is to run through <i>replies</i> and add one to each value.
+Now, suppose that there are <i>y</i> entries in <i>replies</i> that equal <i>x</i>.  If <i>y</i> 
+is less than or equal to <i>x</i>, then 
+all of those rabbits can have the same color: 
+There is a minimum of <i>x</i> rabbits with that color. 
+<p>
+Suppose that <i>y</i> is between <i>x+1</i> and <i>2x</i>.  Then there must be two colors among those rabbits, so the number of rabbits is <i>2x</i>.  
+<p>
+Suppose that <i>y</i> is between <i>2x+1</i> and <i>3x</i>.  Then there must be three colors among those rabbits, so the number of rabbits is <i>3x</i>.  And so on.
+<p>
+So what you need to do to solve this problem is to count the number of entries of <i>replies</i> that have each possible value of <i>replies</i>.  Then for each of those values, you calculate the minimum number of rabbits.  That sum is the minimum number of rabbits.
+<hr>
+Let's use example 1.  The first thing that we do is increment each element of <i>replies</i> so
+that it equals { 2, 2, 3, 3 }.  Now we count the number of entries that has each value:
+<p>
+<UL>
+<LI> There are two entries equal to 2.  In other words, <i>y</i> equals 2 and <i>x</i> equals 2.
+The minimum number of rabbits here is 2.
+<LI> There are two entries equal to 3.  In other words, <i>y</i> equals 2 and <i>x</i> equals 3.
+The minimum number of rabbits here is 3.
+<LI> So the total number of rabbits is 5.
+</UL>
+
+Let's take example 2.  We first increment each element of <i>replies</i> so
+that it equals { 3, 3, 45, 3, 3, 3, 445, 3, 3 }.  Now we count the number of entries that has each value:
+<p>
+<UL>
+<LI> There are seven entries equal to 3.  In other words, <i>y</i> equals 7 and <i>x</i> equals 3.
+There must be three different colors, so the minimum number of rabbits is 9.  Put another way,
+<i>y</i> is between <i>2x+1</i> and <i>3x</i>, so the minimum is <i>3x</i>.
+<LI> There is one entry equal to 45.  In other words, <i>y</i> equals 1 and <i>x</i> equals 45.
+The minimum number of rabbits here is <i>x = 45</i>.
+<LI> There is one entry equal to 445.  In other words, <i>y</i> equals 1 and <i>x</i> equals 445.
+The minimum number of rabbits here is <i>x = 445</i>
+<LI> So the total number of rabbits is 9 + 45 + 445 = 499.
+</UL>
+
+To perform the counting (determining the <i>x</i> and <i>y</i>), I want you to use
+a map.  The keys will be <i>x</i> and the vals will be <i>y</i>.  After you initialize the
+map, you simply run through it figuring out the minimum number of rabbits for each value of
+<i>x</i>.
+<p>
+There are, of course, other ways to do this.  You can sort <i>replies</i> and then do the 
+counting from that.  I don't want you do to that, because it's more bug-prone than using
+a map (and I want you to get practice using the map).
+You can also insert each value of <i>x</i> into a multiset and use the multiset's <i>count()</i>
+method.  I think
+that's bug-prone too, and it's inefficient because the multiset is much larger than the map
+(think about inserting 100 of the same values).  

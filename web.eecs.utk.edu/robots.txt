@@ -1,7 +1,0 @@
-User-agent: *
-Disallow: /~larkin/phpicalendar/
-Disallow: /~atchley/personal/
-Disallow: /cgi-bin/
-Disallow: /~dunigan/gsmnp/m.php
-Disallow: /~ndykas/
-Allow: /

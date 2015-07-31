@@ -17,6 +17,9 @@ void draw() {
   if ((location.getY() > height) || (location.getY() < 0)) {
     velocity.setY(velocity.getY() * -1);
   }
+  if ((location.getZ() > height) || (location.getZ() < 0)) {
+    velocity.setZ(velocity.getZ() * -1);
+  }
 
 
   stroke(0);
